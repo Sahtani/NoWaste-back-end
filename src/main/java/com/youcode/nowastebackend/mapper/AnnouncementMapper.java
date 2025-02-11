@@ -1,6 +1,6 @@
 package com.youcode.nowastebackend.mapper;
 
-import com.youcode.nowastebackend.common.GenericMapper;
+import com.youcode.nowastebackend.common.mapper.GenericMapper;
 import com.youcode.nowastebackend.dto.Announcement.AnnouncementRequestDto;
 import com.youcode.nowastebackend.dto.Announcement.AnnouncementResponseDto;
 import com.youcode.nowastebackend.entity.Announcement;

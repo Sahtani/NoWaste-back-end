@@ -1,4 +1,4 @@
-package com.youcode.nowastebackend.common;
+package com.youcode.nowastebackend.common.mapper;
 
 import org.springframework.stereotype.Component;
 
