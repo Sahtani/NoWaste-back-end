@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 @Getter
@@ -40,8 +42,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Product> products;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Donation> donations;
+  /*  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Donation> donations;*/
 
     // Getters and Setters
 }

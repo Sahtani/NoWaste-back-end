@@ -41,8 +41,8 @@ public class Product {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne
+  /*  @ManyToOne
     @JoinColumn(name = "donation_id")
-    private Donation donation;
+    private Donation donation;*/
 
 }
