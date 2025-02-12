@@ -1,5 +1,6 @@
 package com.youcode.nowastebackend.entity;
 
+import com.youcode.nowastebackend.entity.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,11 +33,11 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private String phoneNumber;
+    private String phone;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role; // Enum: DONOR, BENEFICIARY, ASSOCIATION
+    private Role role;
 
     // Relations
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

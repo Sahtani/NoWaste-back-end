@@ -1,4 +1,4 @@
-package com.youcode.nowastebackend.entity;
+package com.youcode.nowastebackend.entity.enums;
 
 public enum ProductStatus {
     AVAILABLE,

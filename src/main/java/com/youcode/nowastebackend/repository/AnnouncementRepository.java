@@ -1,10 +1,9 @@
 package com.youcode.nowastebackend.repository;
 
 import com.youcode.nowastebackend.entity.Announcement;
-import com.youcode.nowastebackend.entity.ProductStatus;
+import com.youcode.nowastebackend.entity.enums.ProductStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
-import java.util.UUID;
 
 public interface AnnouncementRepository extends JpaRepository<Announcement, Long> {
 

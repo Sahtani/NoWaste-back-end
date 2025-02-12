@@ -6,9 +6,11 @@ import com.youcode.nowastebackend.dto.Announcement.AnnouncementResponseDto;
 import com.youcode.nowastebackend.entity.Announcement;
 import com.youcode.nowastebackend.repository.AnnouncementRepository;
 import com.youcode.nowastebackend.service.AnnouncementService;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api/announcements")
 public class AnnouncementController extends GenericController<AnnouncementRequestDto, AnnouncementResponseDto, Long> {
 
     private AnnouncementService  announcementService;

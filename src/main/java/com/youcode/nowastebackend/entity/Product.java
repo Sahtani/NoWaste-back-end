@@ -1,5 +1,6 @@
 package com.youcode.nowastebackend.entity;
 
+import com.youcode.nowastebackend.entity.enums.ProductStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

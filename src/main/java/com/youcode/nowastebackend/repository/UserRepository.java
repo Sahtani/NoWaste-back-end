@@ -1,6 +1,6 @@
 package com.youcode.nowastebackend.repository;
 
-import com.youcode.nowastebackend.entity.Role;
+import com.youcode.nowastebackend.entity.enums.Role;
 import com.youcode.nowastebackend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

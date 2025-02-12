@@ -3,6 +3,7 @@ package com.youcode.nowastebackend.entity;
 import com.youcode.nowastebackend.entity.Product;
 import com.youcode.nowastebackend.entity.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,10 @@ public class Announcement {
 
     @ManyToOne
     private Product product;
+
+
+    @NotNull
+    private LocalDate createdAt;
 
     @ManyToOne
     private User user;
