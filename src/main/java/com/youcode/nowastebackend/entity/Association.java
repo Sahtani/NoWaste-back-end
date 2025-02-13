@@ -1,6 +1,10 @@
 package com.youcode.nowastebackend.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,12 +16,21 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Association {
+
     @Id
     @GeneratedValue
     private Long id;
 
+    @NotNull
     private String name;
-    private String contactInfo;
+
+    @NotNull
+    @Column(unique = true)
+    private String contactEmail;
+
+    @NotNull
+    @Column(unique = true)
+    private String contactPhone;
 
 
 }

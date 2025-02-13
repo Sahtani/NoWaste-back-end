@@ -1,11 +1,13 @@
 package com.youcode.nowastebackend.dto.request;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDateTime;
 
 public record ReservationRequestDto(
-        Long userId,
-        Long productId,
-        LocalDateTime reservationDate,
+        @NotNull LocalDateTime reservationDate,
+        @NotNull Long beneficiaryId,
+        @NotNull Long announcementId,
         String status
 ) {
 }

@@ -21,19 +21,19 @@ public class User {
     private Long id;
 
     @Column(nullable = false)
-    private String firstName;
-
-    @Column(nullable = false)
-    private String lastName;
+    private String name;
 
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false, unique = true)
+    private String phone;
+
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private String phone;
+    @Column( nullable = false)
+    private String address;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -43,8 +43,4 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Product> products;
 
-  /*  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Donation> donations;*/
-
-    // Getters and Setters
 }

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -23,16 +24,17 @@ public class Announcement {
     @GeneratedValue
     private Long id;
 
+    @NotNull
+    private LocalDateTime postedDate;
+
+    private LocalDate createdAt;
+
     @ManyToOne
     private Product product;
-
-
-    @NotNull
-    private LocalDate createdAt;
 
     @ManyToOne
     private User user;
 
-    private LocalDate postedDate;
+
 
 }

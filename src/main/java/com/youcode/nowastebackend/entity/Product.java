@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "products")
@@ -27,11 +28,18 @@ public class Product {
     private String category;
 
     @Column(nullable = false)
-    private LocalDate expirationDate;
+    private String description;
+
+    private Double price;
 
     @Column(nullable = false)
-    private boolean isAvailable;
+    private Integer quantity;
 
+    @Column(nullable = false)
+    private LocalDateTime expirationDate;
+
+
+    @Column(nullable = false)
     private String location;
 
     private String image;
@@ -42,8 +50,5 @@ public class Product {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-  /*  @ManyToOne
-    @JoinColumn(name = "donation_id")
-    private Donation donation;*/
 
 }

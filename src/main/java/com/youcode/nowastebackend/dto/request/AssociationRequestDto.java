@@ -1,9 +1,11 @@
 package com.youcode.nowastebackend.dto.request;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record AssociationRequestDto(
-        String name,
-        String description,
-        String contactEmail,
-        String contactPhone
+        @NotBlank String name,
+        @NotBlank String description,
+        @NotBlank String contactEmail,
+        @NotBlank String contactPhone
 ) {
 }

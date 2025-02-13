@@ -2,6 +2,7 @@ package com.youcode.nowastebackend.common.controller;
 
 import com.youcode.nowastebackend.common.service.GenericService;
 import com.youcode.nowastebackend.dto.response.PagedResponse;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
