@@ -1,4 +1,4 @@
-package com.youcode.nowastebackend.dto;
+package com.youcode.nowastebackend.dto.response;
 
 import java.util.List;
 

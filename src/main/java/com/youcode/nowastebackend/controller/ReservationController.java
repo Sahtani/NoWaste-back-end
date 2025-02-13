@@ -1,10 +1,8 @@
 package com.youcode.nowastebackend.controller;
 
 import com.youcode.nowastebackend.common.controller.GenericController;
-import com.youcode.nowastebackend.dto.Reservation.ReservationRequestDto;
-import com.youcode.nowastebackend.dto.Reservation.ReservationResponseDto;
-import com.youcode.nowastebackend.entity.Reservation;
-import com.youcode.nowastebackend.repository.ReservationRepository;
+import com.youcode.nowastebackend.dto.request.ReservationRequestDto;
+import com.youcode.nowastebackend.dto.response.ReservationResponseDto;
 import com.youcode.nowastebackend.service.ReservationService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

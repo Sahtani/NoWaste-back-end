@@ -1,4 +1,4 @@
-package com.youcode.nowastebackend.dto.User;
+package com.youcode.nowastebackend.dto.response;
 
 public record UserResponseDto(
         Long id,

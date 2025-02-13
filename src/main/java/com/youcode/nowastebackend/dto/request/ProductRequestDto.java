@@ -1,8 +1,8 @@
-package com.youcode.nowastebackend.dto.Product;
+package com.youcode.nowastebackend.dto.request;
 
 import java.time.LocalDateTime;
 
-public record ProductResponseDto(
+public record ProductRequestDto(
         Long id,
         String name,
         String category,

@@ -1,4 +1,4 @@
-package com.youcode.nowastebackend.dto.Reservation;
+package com.youcode.nowastebackend.dto.request;
 
 import java.time.LocalDateTime;
 

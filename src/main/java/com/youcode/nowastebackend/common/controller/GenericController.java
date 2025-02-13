@@ -1,7 +1,7 @@
 package com.youcode.nowastebackend.common.controller;
 
 import com.youcode.nowastebackend.common.service.GenericService;
-import com.youcode.nowastebackend.dto.PagedResponse;
+import com.youcode.nowastebackend.dto.response.PagedResponse;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

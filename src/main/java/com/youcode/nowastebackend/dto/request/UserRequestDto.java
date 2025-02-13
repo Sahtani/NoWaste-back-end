@@ -1,4 +1,4 @@
-package com.youcode.nowastebackend.dto.User;
+package com.youcode.nowastebackend.dto.request;
 
 public record UserRequestDto(
         String firstName,

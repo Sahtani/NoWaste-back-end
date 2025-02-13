@@ -2,7 +2,7 @@ package com.youcode.nowastebackend.common.service;
 
 import com.youcode.nowastebackend.common.exception.EntityNotFoundException;
 import com.youcode.nowastebackend.common.mapper.GenericMapper;
-import com.youcode.nowastebackend.dto.PagedResponse;
+import com.youcode.nowastebackend.dto.response.PagedResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

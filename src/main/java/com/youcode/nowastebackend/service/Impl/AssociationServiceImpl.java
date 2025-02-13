@@ -2,7 +2,7 @@ package com.youcode.nowastebackend.service.Impl;
 
 import com.youcode.nowastebackend.common.service.AbstractService;
 import com.youcode.nowastebackend.dto.Association.AssociationRequestDTO;
-import com.youcode.nowastebackend.dto.Association.AssociationResponseDto;
+import com.youcode.nowastebackend.dto.response.AssociationResponseDto;
 import com.youcode.nowastebackend.entity.Association;
 import com.youcode.nowastebackend.service.AssociationService;
 import jakarta.transaction.Transactional;

@@ -1,6 +1,6 @@
 package com.youcode.nowastebackend.common.service;
 
-import com.youcode.nowastebackend.dto.PagedResponse;
+import com.youcode.nowastebackend.dto.response.PagedResponse;
 import org.springframework.data.domain.Pageable;
 
 public interface GenericService<RequestDTO, ResponseDTO, ID> {

@@ -1,7 +1,6 @@
-package com.youcode.nowastebackend.dto.Association;
+package com.youcode.nowastebackend.dto.request;
 
-public record AssociationResponseDto(
-        Long id,
+public record AssociationRequestDto(
         String name,
         String description,
         String contactEmail,
