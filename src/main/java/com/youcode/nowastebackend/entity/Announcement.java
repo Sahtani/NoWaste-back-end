@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -21,7 +22,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Announcement {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
@@ -29,11 +30,15 @@ public class Announcement {
 
     private LocalDate createdAt;
 
-    @ManyToOne
+    @OneToOne
     private Product product;
 
     @ManyToOne
     private User user;
+
+    @OneToMany(mappedBy = "announcement")
+    private List<Reservation> reservations;
+
 
 
 

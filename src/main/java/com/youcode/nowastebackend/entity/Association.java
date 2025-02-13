@@ -32,5 +32,8 @@ public class Association {
     @Column(unique = true)
     private String contactPhone;
 
+   /* @OneToMany(mappedBy = "association")
+    private List<Notification> notifications;
+*/
 
 }

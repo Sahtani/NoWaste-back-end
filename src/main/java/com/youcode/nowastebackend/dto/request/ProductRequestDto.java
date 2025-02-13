@@ -12,7 +12,7 @@ public record ProductRequestDto(
         @NotBlank String description,
         @NotNull Double price,
         @NotNull Integer quantity,
-        LocalDateTime expirationDate,
+        @NotNull LocalDateTime expirationDate,
         @NotBlank String location,
         @NotBlank String image,
         ProductStatus status,

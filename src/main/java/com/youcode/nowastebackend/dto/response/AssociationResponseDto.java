@@ -1,10 +1,13 @@
 package com.youcode.nowastebackend.dto.response;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public record AssociationResponseDto(
-        Long id,
-        String name,
-        String description,
-        String contactEmail,
-        String contactPhone
+        @NotNull Long id,
+        @NotBlank String name,
+        @NotBlank String description,
+        @NotBlank String contactEmail,
+        @NotBlank String contactPhone
 ) {
 }

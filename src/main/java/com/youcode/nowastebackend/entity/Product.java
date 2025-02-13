@@ -45,10 +45,11 @@ public class Product {
     private String image;
 
     private ProductStatus status;
-    // Relations
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+
+    @OneToOne(mappedBy = "product" , cascade = CascadeType.ALL)
+    private Announcement announcement;
+
+
 
 
 }

@@ -41,6 +41,12 @@ public class User {
 
     // Relations
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Product> products;
+    private List<Announcement> announcements;
+
+    @OneToMany(mappedBy = "beneficiary")
+    private List<Reservation> reservations;
+
+    /*@OneToMany(mappedBy = "user")
+    private List<Notification> notifications;*/
 
 }
