@@ -35,9 +35,9 @@ public class User {
     @Column( nullable = false)
     private String address;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @OneToOne
     private Role role;
+
 
     // Relations
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
