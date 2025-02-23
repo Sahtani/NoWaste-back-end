@@ -17,7 +17,7 @@ public class Role {
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private String name; // "DONOR", "BENEFICIARY", "ADMIN"
+    private String name;
 
     public Role(String name) {
         this.name = name;

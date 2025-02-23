@@ -1,10 +1,9 @@
-package com.youcode.nowastebackend.dto.User;
+package com.youcode.nowastebackend.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record RoleDto(
-        @NotNull Long id,
+public record RoleRequestDto(
         @NotBlank String name
 ) {
 }

@@ -1,6 +1,5 @@
 package com.youcode.nowastebackend.entity;
 
-import com.youcode.nowastebackend.entity.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
