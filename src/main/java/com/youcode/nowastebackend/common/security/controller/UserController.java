@@ -1,10 +1,10 @@
 package com.youcode.nowastebackend.common.security.controller;
 
 import com.youcode.nowastebackend.common.controller.GenericController;
-import com.youcode.nowastebackend.common.security.config.Jwt.JwtUtils;
 import com.youcode.nowastebackend.common.security.dto.request.AppUserRequestDto;
-import com.youcode.nowastebackend.common.security.dto.request.LoginResponseDto;
+import com.youcode.nowastebackend.common.security.dto.request.LoginRequestDto;
 import com.youcode.nowastebackend.common.security.dto.response.AppUserResponseDto;
+import com.youcode.nowastebackend.common.security.dto.response.LoginResponseDto;
 import com.youcode.nowastebackend.common.security.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,17 +18,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController extends GenericController<AppUserRequestDto, AppUserResponseDto, Long> {
 
     private final UserService userService;
-private final JwtUtils jwtUtils;
-    public UserController(UserService userService, JwtUtils jwtUtils) {
+    public UserController(UserService userService) {
         super(userService);
         this.userService = userService;
-        this.jwtUtils = jwtUtils;
     }
+    @Override
     @PostMapping("/public/register")
-    public ResponseEntity<LoginResponseDto> register(@RequestBody AppUserRequestDto requestDto) {
+    public ResponseEntity<AppUserResponseDto> create(@RequestBody AppUserRequestDto requestDto) {
         AppUserResponseDto responseDto = service.save(requestDto);
-        String jwtToken = jwtUtils.generateToken(responseDto.email());
-        return new ResponseEntity<>(new LoginResponseDto(jwtToken, "User registered successfully!"), HttpStatus.CREATED);
+        return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/public/login")
+    public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto requestDto) {
+        LoginResponseDto responseDto = userService.login(requestDto);
+        return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
 
 
