@@ -1,4 +1,4 @@
-package com.youcode.nowastebackend.controller;
+package com.youcode.nowastebackend.common.security.controller;
 
 import com.youcode.nowastebackend.common.security.dto.request.AppRoleRequestDto;
 import com.youcode.nowastebackend.common.security.dto.response.AppRoleResponseDto;

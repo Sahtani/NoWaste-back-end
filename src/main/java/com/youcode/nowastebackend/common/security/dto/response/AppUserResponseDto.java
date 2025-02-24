@@ -10,6 +10,7 @@ public record AppUserResponseDto(
         @NotBlank String email,
         @NotBlank String password,
         @NotBlank String phone,
+        String token,
         @NotBlank RoleEmbeddableDto role
 ) {
 }
