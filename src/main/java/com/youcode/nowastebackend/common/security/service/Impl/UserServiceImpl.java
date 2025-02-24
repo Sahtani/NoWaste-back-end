@@ -1,14 +1,15 @@
-package com.youcode.nowastebackend.service.Impl;
+package com.youcode.nowastebackend.common.security.service.Impl;
 
+import com.youcode.nowastebackend.common.security.dto.ChangePasswordDto;
+import com.youcode.nowastebackend.common.security.dto.LoginResponseDto;
+import com.youcode.nowastebackend.common.security.service.UserService;
 import com.youcode.nowastebackend.common.service.AbstractService;
 import com.youcode.nowastebackend.dto.request.UserRequestDto;
 import com.youcode.nowastebackend.dto.response.UserResponseDto;
 import com.youcode.nowastebackend.entity.User;
-import com.youcode.nowastebackend.mapper.RoleMapper;
 import com.youcode.nowastebackend.mapper.UserMapper;
 import com.youcode.nowastebackend.repository.RoleRepository;
 import com.youcode.nowastebackend.repository.UserRepository;
-import com.youcode.nowastebackend.service.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -16,7 +17,7 @@ import org.springframework.validation.annotation.Validated;
 @Service
 @Validated
 @Transactional
-public class UserServiceImpl extends AbstractService<User, UserRequestDto, UserResponseDto, Long> implements UserService{
+public class UserServiceImpl extends AbstractService<User, UserRequestDto, UserResponseDto, Long> implements UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -27,5 +28,20 @@ public class UserServiceImpl extends AbstractService<User, UserRequestDto, UserR
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userMapper = userMapper;
+    }
+
+    @Override
+    public UserResponseDto getByUsername(String name) {
+        return null;
+    }
+
+    @Override
+    public void changePassword(ChangePasswordDto changePasswordDto) {
+
+    }
+
+    @Override
+    public LoginResponseDto login(LoginResponseDto loginResponseDto) {
+        return null;
     }
 }

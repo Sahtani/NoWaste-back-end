@@ -1,4 +1,4 @@
-package com.youcode.nowastebackend.common.config;
+package com.youcode.nowastebackend.common.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
