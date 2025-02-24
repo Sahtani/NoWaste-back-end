@@ -9,7 +9,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
+@Service
 public class HaveIBeenPwnedService {
 
 

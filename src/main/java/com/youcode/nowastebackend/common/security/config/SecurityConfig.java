@@ -47,7 +47,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/api/public/**").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/api/colombophile/**").hasRole("COLOMBOPHILE")
                         .requestMatchers("/api/association/**").hasRole("ASSOCIATION")
                         .anyRequest().authenticated())
                 .exceptionHandling(exceptionHandling -> exceptionHandling
