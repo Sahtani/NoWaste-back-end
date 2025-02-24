@@ -3,14 +3,19 @@ package com.youcode.nowastebackend.common.service;
 import com.youcode.nowastebackend.common.exception.EntityNotFoundException;
 import com.youcode.nowastebackend.common.mapper.GenericMapper;
 import com.youcode.nowastebackend.dto.response.PagedResponse;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
+@Validated
+@AllArgsConstructor
+@RequiredArgsConstructor
 public abstract class AbstractService<T, RequestDTO, ResponseDTO, ID> implements GenericService<RequestDTO, ResponseDTO, ID> {
 
     protected JpaRepository<T, ID> repository;
