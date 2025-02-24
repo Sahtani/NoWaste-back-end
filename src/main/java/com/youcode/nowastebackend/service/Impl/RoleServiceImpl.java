@@ -4,7 +4,7 @@ import com.youcode.nowastebackend.common.security.dto.request.AppRoleRequestDto;
 import com.youcode.nowastebackend.common.security.dto.response.AppRoleResponseDto;
 import com.youcode.nowastebackend.common.security.entity.Role;
 import com.youcode.nowastebackend.mapper.RoleMapper;
-import com.youcode.nowastebackend.repository.RoleRepository;
+import com.youcode.nowastebackend.repository.AppRoleRepository;
 import com.youcode.nowastebackend.service.RoleService;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -19,7 +19,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class RoleServiceImpl implements RoleService {
 
-    private final RoleRepository roleRepository;
+    private final AppRoleRepository roleRepository;
     private final RoleMapper roleMapper;
 
 

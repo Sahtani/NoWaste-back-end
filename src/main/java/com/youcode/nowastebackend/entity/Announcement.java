@@ -1,6 +1,6 @@
 package com.youcode.nowastebackend.entity;
 
-import com.youcode.nowastebackend.common.security.entity.User;
+import com.youcode.nowastebackend.common.security.entity.AppUser;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -32,7 +32,7 @@ public class Announcement {
     private Product product;
 
     @ManyToOne
-    private User user;
+    private AppUser user;
 
     @OneToMany(mappedBy = "announcement")
     private List<Reservation> reservations;
