@@ -1,4 +1,4 @@
-package com.youcode.nowastebackend.repository;
+package com.youcode.nowastebackend.common.security.repository;
 
 import com.youcode.nowastebackend.common.security.entity.AppRole;
 import org.springframework.data.jpa.repository.JpaRepository;

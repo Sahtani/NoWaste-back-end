@@ -1,4 +1,4 @@
-package com.youcode.nowastebackend.mapper;
+package com.youcode.nowastebackend.common.security.mapper;
 
 import com.youcode.nowastebackend.common.mapper.GenericMapper;
 import com.youcode.nowastebackend.common.security.dto.request.AppUserRequestDto;

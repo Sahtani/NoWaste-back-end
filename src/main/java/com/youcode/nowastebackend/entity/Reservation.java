@@ -1,6 +1,6 @@
 package com.youcode.nowastebackend.entity;
 
-import com.youcode.nowastebackend.common.security.entity.User;
+import com.youcode.nowastebackend.common.security.entity.AppUser;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -28,7 +28,7 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumn(name = "beneficiary_id", nullable = false)
-    private User beneficiary;
+    private AppUser beneficiary;
 
 
 }
