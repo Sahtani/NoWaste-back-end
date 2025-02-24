@@ -7,6 +7,6 @@ import com.youcode.nowastebackend.common.security.entity.AppUser;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper extends GenericMapper<AppUser, AppUserRequestDto, AppUserResponseDto> {
+public interface AppUserMapper extends GenericMapper<AppUser, AppUserRequestDto, AppUserResponseDto> {
 
 }

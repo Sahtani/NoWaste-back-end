@@ -5,17 +5,15 @@ import com.youcode.nowastebackend.common.security.dto.password.ChangePasswordDto
 import com.youcode.nowastebackend.common.security.dto.request.LoginRequestDto;
 import com.youcode.nowastebackend.common.security.dto.response.LoginResponseDto;
 import com.youcode.nowastebackend.common.security.entity.AppUser;
+import com.youcode.nowastebackend.common.security.mapper.AppUserMapper;
 import com.youcode.nowastebackend.common.security.service.UserService;
-import com.youcode.nowastebackend.common.service.AbstractService;
 import com.youcode.nowastebackend.common.security.dto.request.AppUserRequestDto;
 import com.youcode.nowastebackend.common.security.dto.response.AppUserResponseDto;
-import com.youcode.nowastebackend.common.security.mapper.UserMapper;
 import com.youcode.nowastebackend.common.security.repository.AppRoleRepository;
 import com.youcode.nowastebackend.common.security.repository.AppUserRepository;
 import com.youcode.nowastebackend.dto.response.PagedResponse;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,10 +30,12 @@ public class UserServiceImpl  implements UserService {
 
     private final AppUserRepository userRepository;
     private final AppRoleRepository roleRepository;
-    private final UserMapper userMapper;
+    private final AppUserMapper userMapper;
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
+    private final AppUserRepository appUserRepository;
+    private final HaveIBeenPwnedService haveIBeenPwnedService;
 
     @Override
     public AppUserResponseDto getByUsername(String name) {
@@ -47,6 +47,19 @@ public class UserServiceImpl  implements UserService {
 
     }
 
+    @Override
+    public AppUserResponseDto save(AppUserRequestDto requestDto) {
+        if(appUserRepository.findByEmail(requestDto.email()).isPresent()){
+            throw new IllegalArgumentException("Email already exists");
+        }
+        if(haveIBeenPwnedService.isPasswordPwned(requestDto.password())){
+            throw new IllegalArgumentException("Password is compromised. Please choose another one.");
+        }
+        AppUser appUser = userMapper.toEntity(requestDto);
+        appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+        return userMapper.toDto(appUserRepository.save(appUser));
+
+    }
     @Override
     public LoginResponseDto login(LoginRequestDto loginRequestDto) {
         Authentication authentication = authenticationManager.authenticate(
@@ -64,10 +77,6 @@ public class UserServiceImpl  implements UserService {
                 return responseDto;
     }
 
-    @Override
-    public AppUserResponseDto save(AppUserRequestDto requestDto) {
-        return null;
-    }
 
     @Override
     public AppUserResponseDto update(Long aLong, AppUserRequestDto requestDto) {
