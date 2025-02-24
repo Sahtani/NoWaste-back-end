@@ -1,15 +1,16 @@
-package com.youcode.nowastebackend.dto.response;
+package com.youcode.nowastebackend.common.security.dto.response;
 
 import com.youcode.nowastebackend.dto.embeddable.RoleEmbeddableDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record UserResponseDto(
+public record AppUserResponseDto(
         @NotNull Long id,
         @NotBlank String name,
         @NotBlank String email,
         @NotBlank String password,
         @NotBlank String phone,
+        String token,
         @NotBlank RoleEmbeddableDto role
 ) {
 }

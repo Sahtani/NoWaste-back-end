@@ -1,10 +1,10 @@
 package com.youcode.nowastebackend.service.Impl;
 
-import com.youcode.nowastebackend.dto.request.RoleRequestDto;
-import com.youcode.nowastebackend.dto.response.RoleResponseDto;
-import com.youcode.nowastebackend.entity.Role;
+import com.youcode.nowastebackend.common.security.dto.request.AppRoleRequestDto;
+import com.youcode.nowastebackend.common.security.dto.response.AppRoleResponseDto;
+import com.youcode.nowastebackend.common.security.entity.AppRole;
 import com.youcode.nowastebackend.mapper.RoleMapper;
-import com.youcode.nowastebackend.repository.RoleRepository;
+import com.youcode.nowastebackend.common.security.repository.AppRoleRepository;
 import com.youcode.nowastebackend.service.RoleService;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -19,19 +19,17 @@ import java.util.Optional;
 @AllArgsConstructor
 public class RoleServiceImpl implements RoleService {
 
-    private final RoleRepository roleRepository;
+    private final AppRoleRepository roleRepository;
     private final RoleMapper roleMapper;
 
 
-    public RoleResponseDto createRole(RoleRequestDto roleRequestDto) {
-        Optional<Role> existingRole = roleRepository.findByName(roleRequestDto.name());
+    public AppRoleResponseDto createRole(AppRoleRequestDto roleRequestDto) {
+        Optional<AppRole> existingRole = roleRepository.findByName(roleRequestDto.name());
         if (existingRole.isPresent()) {
             throw new RuntimeException("Role already exists!");
         }
-
-    //    RoleResponseDto newRole = new RoleResponseDto(roleRequestDto.name());
-        Role newRole = roleMapper.toEntity(roleRequestDto);
-        Role savedRole = roleRepository.save(newRole);
+        AppRole newRole = roleMapper.toEntity(roleRequestDto);
+        AppRole savedRole = roleRepository.save(newRole);
         return roleMapper.toDto(savedRole);
 
     }

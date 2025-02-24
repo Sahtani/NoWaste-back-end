@@ -1,7 +1,6 @@
 package com.youcode.nowastebackend.entity;
 
-import com.youcode.nowastebackend.entity.Product;
-import com.youcode.nowastebackend.entity.User;
+import com.youcode.nowastebackend.common.security.entity.AppUser;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -12,7 +11,6 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "announcements")
@@ -34,7 +32,7 @@ public class Announcement {
     private Product product;
 
     @ManyToOne
-    private User user;
+    private AppUser user;
 
     @OneToMany(mappedBy = "announcement")
     private List<Reservation> reservations;

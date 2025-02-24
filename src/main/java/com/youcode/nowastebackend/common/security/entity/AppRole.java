@@ -1,4 +1,4 @@
-package com.youcode.nowastebackend.entity;
+package com.youcode.nowastebackend.common.security.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Role {
+public class AppRole {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -19,7 +19,7 @@ public class Role {
     @Column(unique = true, nullable = false)
     private String name;
 
-    public Role(String name) {
+    public AppRole(String name) {
         this.name = name;
     }
 }

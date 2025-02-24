@@ -1,10 +1,9 @@
 package com.youcode.nowastebackend.service;
 
-import com.youcode.nowastebackend.dto.request.RoleRequestDto;
-import com.youcode.nowastebackend.dto.response.RoleResponseDto;
-import com.youcode.nowastebackend.entity.Role;
+import com.youcode.nowastebackend.common.security.dto.request.AppRoleRequestDto;
+import com.youcode.nowastebackend.common.security.dto.response.AppRoleResponseDto;
 
 public interface RoleService {
 
-    public RoleResponseDto createRole(RoleRequestDto roleDto);
+    public AppRoleResponseDto createRole(AppRoleRequestDto roleDto);
 }

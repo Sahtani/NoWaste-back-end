@@ -1,13 +1,14 @@
-package com.youcode.nowastebackend.dto.request;
+package com.youcode.nowastebackend.common.security.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record UserRequestDto(
+public record AppUserRequestDto(
         @NotBlank String name,
         @NotBlank String email,
         @NotBlank String password,
+        @NotBlank String address,
         @NotBlank String phone,
-        @NotBlank RoleRequestDto role
+        @NotBlank AppRoleRequestDto role
 ) {
 
 }
