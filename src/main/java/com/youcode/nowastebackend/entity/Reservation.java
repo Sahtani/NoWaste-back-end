@@ -1,5 +1,6 @@
 package com.youcode.nowastebackend.entity;
 
+import com.youcode.nowastebackend.common.security.entity.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

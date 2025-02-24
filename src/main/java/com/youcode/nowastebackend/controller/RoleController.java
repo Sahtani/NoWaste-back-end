@@ -2,7 +2,6 @@ package com.youcode.nowastebackend.controller;
 
 import com.youcode.nowastebackend.dto.request.RoleRequestDto;
 import com.youcode.nowastebackend.dto.response.RoleResponseDto;
-import com.youcode.nowastebackend.entity.Role;
 import com.youcode.nowastebackend.service.RoleService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

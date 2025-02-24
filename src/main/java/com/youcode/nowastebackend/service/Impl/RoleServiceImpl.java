@@ -2,7 +2,7 @@ package com.youcode.nowastebackend.service.Impl;
 
 import com.youcode.nowastebackend.dto.request.RoleRequestDto;
 import com.youcode.nowastebackend.dto.response.RoleResponseDto;
-import com.youcode.nowastebackend.entity.Role;
+import com.youcode.nowastebackend.common.security.entity.Role;
 import com.youcode.nowastebackend.mapper.RoleMapper;
 import com.youcode.nowastebackend.repository.RoleRepository;
 import com.youcode.nowastebackend.service.RoleService;

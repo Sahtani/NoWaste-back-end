@@ -1,5 +1,7 @@
-package com.youcode.nowastebackend.entity;
+package com.youcode.nowastebackend.common.security.entity;
 
+import com.youcode.nowastebackend.entity.Announcement;
+import com.youcode.nowastebackend.entity.Reservation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +16,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,7 +37,7 @@ public class User {
     private String address;
 
     @OneToOne
-    private Role role;
+    private AppRole role;
 
 
     // Relations
