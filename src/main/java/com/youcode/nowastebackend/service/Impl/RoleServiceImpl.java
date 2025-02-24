@@ -1,7 +1,7 @@
 package com.youcode.nowastebackend.service.Impl;
 
-import com.youcode.nowastebackend.dto.request.RoleRequestDto;
-import com.youcode.nowastebackend.dto.response.RoleResponseDto;
+import com.youcode.nowastebackend.common.security.dto.request.AppRoleRequestDto;
+import com.youcode.nowastebackend.common.security.dto.response.AppRoleResponseDto;
 import com.youcode.nowastebackend.common.security.entity.Role;
 import com.youcode.nowastebackend.mapper.RoleMapper;
 import com.youcode.nowastebackend.repository.RoleRepository;
@@ -23,7 +23,7 @@ public class RoleServiceImpl implements RoleService {
     private final RoleMapper roleMapper;
 
 
-    public RoleResponseDto createRole(RoleRequestDto roleRequestDto) {
+    public AppRoleResponseDto createRole(AppRoleRequestDto roleRequestDto) {
         Optional<Role> existingRole = roleRepository.findByName(roleRequestDto.name());
         if (existingRole.isPresent()) {
             throw new RuntimeException("Role already exists!");

@@ -1,11 +1,11 @@
 package com.youcode.nowastebackend.common.security.service.Impl;
 
-import com.youcode.nowastebackend.common.security.dto.ChangePasswordDto;
-import com.youcode.nowastebackend.common.security.dto.LoginResponseDto;
+import com.youcode.nowastebackend.common.security.dto.password.ChangePasswordDto;
+import com.youcode.nowastebackend.common.security.dto.response.LoginResponseDto;
 import com.youcode.nowastebackend.common.security.service.UserService;
 import com.youcode.nowastebackend.common.service.AbstractService;
-import com.youcode.nowastebackend.dto.request.UserRequestDto;
-import com.youcode.nowastebackend.dto.response.UserResponseDto;
+import com.youcode.nowastebackend.common.security.dto.request.AppUserRequestDto;
+import com.youcode.nowastebackend.common.security.dto.response.AppUserResponseDto;
 import com.youcode.nowastebackend.common.security.entity.User;
 import com.youcode.nowastebackend.mapper.UserMapper;
 import com.youcode.nowastebackend.repository.RoleRepository;
@@ -17,7 +17,7 @@ import org.springframework.validation.annotation.Validated;
 @Service
 @Validated
 @Transactional
-public class UserServiceImpl extends AbstractService<User, UserRequestDto, UserResponseDto, Long> implements UserService {
+public class UserServiceImpl extends AbstractService<User, AppUserRequestDto, AppUserResponseDto, Long> implements UserService {
 
     private final AppUserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -31,7 +31,7 @@ public class UserServiceImpl extends AbstractService<User, UserRequestDto, UserR
     }
 
     @Override
-    public UserResponseDto getByUsername(String name) {
+    public AppUserResponseDto getByUsername(String name) {
         return null;
     }
 

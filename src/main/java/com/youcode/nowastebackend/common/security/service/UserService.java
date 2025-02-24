@@ -1,13 +1,13 @@
 package com.youcode.nowastebackend.common.security.service;
 
-import com.youcode.nowastebackend.common.security.dto.ChangePasswordDto;
-import com.youcode.nowastebackend.common.security.dto.LoginResponseDto;
+import com.youcode.nowastebackend.common.security.dto.password.ChangePasswordDto;
+import com.youcode.nowastebackend.common.security.dto.response.LoginResponseDto;
 import com.youcode.nowastebackend.common.service.GenericService;
-import com.youcode.nowastebackend.dto.request.UserRequestDto;
-import com.youcode.nowastebackend.dto.response.UserResponseDto;
+import com.youcode.nowastebackend.common.security.dto.request.AppUserRequestDto;
+import com.youcode.nowastebackend.common.security.dto.response.AppUserResponseDto;
 
-public interface UserService extends GenericService<UserRequestDto, UserResponseDto, Long> {
-    UserResponseDto getByUsername(String name);
+public interface UserService extends GenericService<AppUserRequestDto, AppUserResponseDto, Long> {
+    AppUserResponseDto getByUsername(String name);
     void changePassword(ChangePasswordDto changePasswordDto);
     LoginResponseDto login(LoginResponseDto loginResponseDto);
 }

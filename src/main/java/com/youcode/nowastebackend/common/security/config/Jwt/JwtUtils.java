@@ -1,4 +1,4 @@
-package com.youcode.nowastebackend.common.security.Jwt;
+package com.youcode.nowastebackend.common.security.config.Jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
