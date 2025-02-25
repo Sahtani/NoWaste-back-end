@@ -15,9 +15,9 @@ import org.springframework.stereotype.Service;
 public class CustomUserDetailsService implements UserDetailsService {
     private final AppUserRepository userRepository;
     @Override
-    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        AppUser appUser   = userRepository.findByName(name)
-                .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé avec l'email : " + name ));
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        AppUser appUser   = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé avec l'email : " + email ));
 
         return User.builder()
                 .username(appUser.getEmail())

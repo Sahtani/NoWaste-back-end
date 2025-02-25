@@ -36,7 +36,7 @@ public class AppUser {
     @Column( nullable = false)
     private String address;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private AppRole role;
 
 

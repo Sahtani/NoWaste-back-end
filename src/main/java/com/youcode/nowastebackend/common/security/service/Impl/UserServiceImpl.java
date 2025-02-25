@@ -38,16 +38,6 @@ public class UserServiceImpl  implements UserService {
     private final HaveIBeenPwnedService haveIBeenPwnedService;
 
     @Override
-    public AppUserResponseDto getByUsername(String name) {
-        return null;
-    }
-
-    @Override
-    public void changePassword(ChangePasswordDto changePasswordDto) {
-
-    }
-
-    @Override
     public AppUserResponseDto save(AppUserRequestDto requestDto) {
         if(appUserRepository.findByEmail(requestDto.email()).isPresent()){
             throw new IllegalArgumentException("Email already exists");
@@ -95,6 +85,16 @@ public class UserServiceImpl  implements UserService {
 
     @Override
     public void deleteById(Long aLong) {
+
+    }
+
+    @Override
+    public AppUserResponseDto getByUsername(String name) {
+        return null;
+    }
+
+    @Override
+    public void changePassword(ChangePasswordDto changePasswordDto) {
 
     }
 }
