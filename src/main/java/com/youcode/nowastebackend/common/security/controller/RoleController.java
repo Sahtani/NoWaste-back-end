@@ -8,13 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/roles")
+@RequestMapping("/api/roles")
 @AllArgsConstructor
 public class RoleController {
 
     private final RoleService roleService;
 
-    @PostMapping("/create")
+    @PostMapping("/public/create")
     public ResponseEntity<AppRoleResponseDto> createRole(@RequestBody AppRoleRequestDto roleDto) {
         AppRoleResponseDto role = roleService.createRole(roleDto);
         return ResponseEntity.ok(role);

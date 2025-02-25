@@ -1,6 +1,7 @@
 package com.youcode.nowastebackend.common.security.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record AppUserRequestDto(
         @NotBlank String name,
@@ -8,7 +9,7 @@ public record AppUserRequestDto(
         @NotBlank String password,
         @NotBlank String address,
         @NotBlank String phone,
-        @NotBlank AppRoleRequestDto role
+        @NotNull Long role_id
 ) {
 
 }
