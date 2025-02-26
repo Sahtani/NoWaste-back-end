@@ -1,4 +1,4 @@
-package com.youcode.nowastebackend.controller;
+package com.youcode.nowastebackend.web;
 
 import com.youcode.nowastebackend.common.controller.GenericController;
 import com.youcode.nowastebackend.dto.request.ProductRequestDto;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api/products/public")
 public class ProductController extends GenericController<ProductRequestDto, ProductResponseDto, Long> {
 
     private ProductService productService;

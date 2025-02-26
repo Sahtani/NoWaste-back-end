@@ -1,4 +1,4 @@
-package com.youcode.nowastebackend.controller;
+package com.youcode.nowastebackend.web;
 
 import com.youcode.nowastebackend.common.controller.GenericController;
 import com.youcode.nowastebackend.dto.request.AssociationRequestDto;

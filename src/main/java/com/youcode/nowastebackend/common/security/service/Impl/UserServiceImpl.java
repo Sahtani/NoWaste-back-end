@@ -51,17 +51,6 @@ public class UserServiceImpl  implements UserService {
 
     }
 
-    //        if(appUserRepository.findByEmail(requestDto.email()).isPresent()){
-//            throw new IllegalArgumentException("Email already exists");
-//        }
-//        if(haveIBeenPwnedService.isPasswordPwned(requestDto.password())){
-//            throw new IllegalArgumentException("Password is compromised. Please choose another one.");
-//        }
-//        AppUser appUser = userMapper.toEntity(requestDto);
-//
-//        appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
-//        return userMapper.toDto(appUserRepository.save(appUser));
-
     public AppUserResponseDto createNewUser(AppUserRequestDto requestDto, AppRole role) {
         log.info("Creating a new user with role: {}", role.getName());
 
@@ -131,4 +120,15 @@ public class UserServiceImpl  implements UserService {
     public void changePassword(ChangePasswordDto changePasswordDto) {
 
     }
+
+    //        if(appUserRepository.findByEmail(requestDto.email()).isPresent()){
+//            throw new IllegalArgumentException("Email already exists");
+//        }
+//        if(haveIBeenPwnedService.isPasswordPwned(requestDto.password())){
+//            throw new IllegalArgumentException("Password is compromised. Please choose another one.");
+//        }
+//        AppUser appUser = userMapper.toEntity(requestDto);
+//
+//        appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+//        return userMapper.toDto(appUserRepository.save(appUser));
 }

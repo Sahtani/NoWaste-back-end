@@ -10,7 +10,10 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "announcements")
@@ -28,13 +31,13 @@ public class Announcement {
 
     private LocalDate createdAt;
 
-    @OneToOne
-    private Product product;
+    @OneToMany(mappedBy = "announcement", cascade = CascadeType.ALL)
+    private List<Product> products = new ArrayList<>();
 
     @ManyToOne
     private AppUser user;
 
-    @OneToMany(mappedBy = "announcement")
+    @OneToMany(mappedBy = "announcement", cascade = CascadeType.ALL)
     private List<Reservation> reservations;
 
 

@@ -13,4 +13,6 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @Transactional
 public class ProductServiceImpl extends AbstractService<Product, ProductRequestDto, ProductResponseDto, Long> implements ProductService {
+
+
 }

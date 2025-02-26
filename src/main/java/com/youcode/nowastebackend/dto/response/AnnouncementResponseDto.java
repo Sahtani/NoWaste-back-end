@@ -6,12 +6,13 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record AnnouncementResponseDto(
         Long id ,
         @NotNull LocalDateTime createdAt,
         @NotNull LocalDate postedDate,
-        @NotNull ProductEmbeddableDto product,
+        @NotNull List<ProductEmbeddableDto> products,
         @NotNull UserEmbeddableDto user
 ) {
 }

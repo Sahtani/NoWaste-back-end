@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
@@ -46,7 +46,7 @@ public class Product {
 
     private ProductStatus status;
 
-    @OneToOne(mappedBy = "product" , cascade = CascadeType.ALL)
+    @ManyToOne
     private Announcement announcement;
 
 

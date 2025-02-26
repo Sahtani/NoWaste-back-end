@@ -144,6 +144,13 @@
 			<version>0.11.5</version>
 			<scope>runtime</scope>
 		</dependency>
+		<!--TensorFlow Java API-->
+		<dependency>
+			<groupId>org.tensorflow</groupId>
+			<artifactId>tensorflow</artifactId>
+			<version>1.15.0</version> <!-- Remplacez par la version souhaitée -->
+		</dependency>
+
 	</dependencies>
 
 	<build>
