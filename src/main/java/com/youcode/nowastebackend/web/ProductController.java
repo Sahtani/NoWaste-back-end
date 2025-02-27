@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/products/public")
+@RequestMapping("/api/products")
 public class ProductController extends GenericController<ProductRequestDto, ProductResponseDto, Long> {
 
     private ProductService productService;

@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public record ProductRequestDto(
+         @NotNull Long id,
         @NotBlank String name,
         @NotBlank String category,
         @NotBlank String description,
