@@ -2,7 +2,6 @@ package com.youcode.nowastebackend.common.security.service.Impl;
 
 import com.youcode.nowastebackend.common.security.config.Jwt.JwtUtils;
 import com.youcode.nowastebackend.common.security.dto.password.ChangePasswordDto;
-import com.youcode.nowastebackend.common.security.dto.request.AppRoleRequestDto;
 import com.youcode.nowastebackend.common.security.dto.request.AppUserRequestDto;
 import com.youcode.nowastebackend.common.security.dto.request.LoginRequestDto;
 import com.youcode.nowastebackend.common.security.dto.response.AppUserResponseDto;
@@ -43,8 +42,8 @@ public class UserServiceImpl  implements UserService {
 
     @Override
     public AppUserResponseDto save(AppUserRequestDto requestDto) {
-        AppRole role = roleRepository.findById(requestDto.role_id())
-                .orElseThrow(() -> new RuntimeException("Role not found: " + requestDto.role_id()));
+        AppRole role = roleRepository.findByName(requestDto.role())
+                .orElseThrow(() -> new RuntimeException("Role not found: " + requestDto.role()));
 
         return createNewUser(requestDto, role);
 
@@ -83,9 +82,11 @@ public class UserServiceImpl  implements UserService {
                 ));
                 String token = jwtUtils.generateToken(loginRequestDto.email());
                 LoginResponseDto responseDto = new LoginResponseDto(
-                        token,
                         authentication.getName(),
-                        authentication.getAuthorities().iterator().next().getAuthority()
+                        authentication.getAuthorities().iterator().next().getAuthority(),
+                        token
+
+
 
                 );
                 return responseDto;

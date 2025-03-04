@@ -9,7 +9,7 @@ public record AppUserRequestDto(
         @NotBlank String password,
         @NotBlank String address,
         @NotBlank String phone,
-        @NotNull Long role_id
+        @NotNull String role
 ) {
 
 }

@@ -47,8 +47,6 @@ public class AppUser implements UserDetails {
     @ManyToOne(fetch = FetchType.EAGER)
     private AppRole role;
 
-
-    // Relations
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Announcement> announcements;
 
@@ -66,8 +64,4 @@ public class AppUser implements UserDetails {
     public String getUsername() {
         return "";
     }
-
-    /*@OneToMany(mappedBy = "user")
-    private List<Notification> notifications;*/
-
 }
