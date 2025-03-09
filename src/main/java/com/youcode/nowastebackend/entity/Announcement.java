@@ -26,6 +26,8 @@ public class Announcement {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull private String title;
+
     @NotNull
     private LocalDateTime postedDate;
 

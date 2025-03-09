@@ -53,7 +53,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/api/users/public/**").permitAll()
                         .requestMatchers("/api/roles/public/**").permitAll()
-                        .requestMatchers("/api/announcements/**").permitAll()
+                        .requestMatchers("/api/test/roles").authenticated()
+                        .requestMatchers("/api/announcements/").hasRole("DONOR")
                         .requestMatchers("/api/products/**").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/association/**").hasRole("ASSOCIATION")

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/announcements/public")
+@RequestMapping("/api/announcements/")
 public class AnnouncementController extends GenericController<AnnouncementRequestDto, AnnouncementResponseDto, Long> {
 
     private final AnnouncementService  announcementService;

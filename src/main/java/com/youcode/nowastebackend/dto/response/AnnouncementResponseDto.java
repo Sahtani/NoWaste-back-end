@@ -10,6 +10,7 @@ import java.util.List;
 
 public record AnnouncementResponseDto(
         Long id ,
+        @NotNull String title,
         @NotNull LocalDateTime createdAt,
         @NotNull LocalDate postedDate,
         @NotNull List<ProductEmbeddableDto> products,

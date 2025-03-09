@@ -20,9 +20,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -62,15 +68,19 @@ public class UserServiceImpl  implements UserService {
                 .role(role)
                 .build();
 
-        var savedUer = userRepository.save(user);
-        log.info("User created: {}", savedUer);
-        var token = jwtUtils.generateToken(requestDto.email());
-        return new AppUserResponseDto(
-                savedUer.getName(),
-                savedUer.getEmail(),
-                savedUer.getPassword(),
-                token);
+        var savedUser = userRepository.save(user);
+        log.info("User created: {}", savedUser);
 
+        Collection<SimpleGrantedAuthority> authorities = Collections.singletonList(
+                new SimpleGrantedAuthority("ROLE_" + role.getName())
+        );
+        var token = jwtUtils.generateToken(requestDto.email(), authorities);
+
+        return new AppUserResponseDto(
+                savedUser.getName(),
+                savedUser.getEmail(),
+                savedUser.getPassword(),
+                token);
     }
 
     @Override
@@ -80,16 +90,24 @@ public class UserServiceImpl  implements UserService {
                         loginRequestDto.email(),
                         loginRequestDto.password()
                 ));
-                String token = jwtUtils.generateToken(loginRequestDto.email());
-                LoginResponseDto responseDto = new LoginResponseDto(
-                        authentication.getName(),
-                        authentication.getAuthorities().iterator().next().getAuthority(),
-                        token
 
+        String token = jwtUtils.generateToken(
+                loginRequestDto.email(),
+                authentication.getAuthorities()
+        );
 
+        String role = authentication.getAuthorities().stream()
+                .findFirst()
+                .map(GrantedAuthority::getAuthority)
+                .orElse("ROLE_USER");
 
-                );
-                return responseDto;
+        LoginResponseDto responseDto = new LoginResponseDto(
+                authentication.getName(),
+                role,
+                token
+        );
+
+        return responseDto;
     }
 
     @Override
@@ -122,14 +140,4 @@ public class UserServiceImpl  implements UserService {
 
     }
 
-    //        if(appUserRepository.findByEmail(requestDto.email()).isPresent()){
-//            throw new IllegalArgumentException("Email already exists");
-//        }
-//        if(haveIBeenPwnedService.isPasswordPwned(requestDto.password())){
-//            throw new IllegalArgumentException("Password is compromised. Please choose another one.");
-//        }
-//        AppUser appUser = userMapper.toEntity(requestDto);
-//
-//        appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
-//        return userMapper.toDto(appUserRepository.save(appUser));
 }

@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record AnnouncementRequestDto(
+        @NotNull String title,
         @NotNull LocalDate createdAt,
         @NotNull LocalDateTime postedDate,
         List<ProductRequestDto> produits,
