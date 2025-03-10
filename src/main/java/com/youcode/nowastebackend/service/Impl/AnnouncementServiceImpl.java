@@ -1,5 +1,6 @@
 package com.youcode.nowastebackend.service.Impl;
 
+import com.youcode.nowastebackend.common.exception.EntityNotFoundException;
 import com.youcode.nowastebackend.common.security.entity.AppUser;
 import com.youcode.nowastebackend.common.security.repository.AppUserRepository;
 import com.youcode.nowastebackend.common.service.AbstractService;
@@ -7,6 +8,7 @@ import com.youcode.nowastebackend.dto.request.AnnouncementRequestDto;
 import com.youcode.nowastebackend.dto.response.AnnouncementResponseDto;
 import com.youcode.nowastebackend.entity.Announcement;
 import com.youcode.nowastebackend.entity.Product;
+import com.youcode.nowastebackend.entity.enums.AnnouncementStatus;
 import com.youcode.nowastebackend.mapper.AnnouncementMapper;
 import com.youcode.nowastebackend.mapper.ProductMapper;
 import com.youcode.nowastebackend.repository.AnnouncementRepository;
@@ -16,6 +18,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -86,6 +89,52 @@ public class AnnouncementServiceImpl extends AbstractService<Announcement, Annou
 
         Announcement savedAnnouncement = announcementRepository.save(announcement);
         return announcementMapper.toDto(savedAnnouncement);
+    }
+
+    @Override
+    @Transactional
+    public AnnouncementResponseDto approveAnnouncement(Long id) {
+        Announcement announcement = announcementRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Announcement not found with id: " + id));
+
+        if (announcement.getStatus() != AnnouncementStatus.PENDING) {
+            throw new IllegalStateException("Cannot approve announcement that is not in PENDING state");
+        }
+
+        announcement.setStatus(AnnouncementStatus.APPROVED);
+        announcement.setPostedDate(LocalDateTime.now());
+
+        Announcement approvedAnnouncement = announcementRepository.save(announcement);
+
+        // Notifier le créateur de l'annonce (optionnel)
+      //  notificationService.notifyAnnouncementApproved(approvedAnnouncement);
+
+        return announcementMapper.toDto(approvedAnnouncement) ;
+    }
+
+    @Override
+    @Transactional
+    public AnnouncementResponseDto rejectAnnouncement(Long id, String rejectionReason) {
+        Announcement announcement = announcementRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Announcement not found with id: " + id));
+
+        if (announcement.getStatus() != AnnouncementStatus.PENDING) {
+            throw new IllegalStateException("Cannot reject announcement that is not in PENDING state");
+        }
+
+        announcement.setStatus(AnnouncementStatus.REJECTED);
+        announcement.setRejectionReason(rejectionReason);
+
+        Announcement rejectedAnnouncement = announcementRepository.save(announcement);
+
+     //   notificationService.notifyAnnouncementRejected(rejectedAnnouncement, rejectionReason);
+
+        return announcementMapper.toDto(rejectedAnnouncement) ;
+    }
+
+    @Override
+    public List<AnnouncementResponseDto> getPendingAnnouncements() {
+        return announcementRepository.findByStatus(AnnouncementStatus.PENDING);
     }
 
 }
