@@ -13,7 +13,6 @@ public record AnnouncementResponseDto(
         @NotNull String title,
         @NotNull LocalDateTime createdAt,
         @NotNull LocalDate postedDate,
-        @NotNull List<ProductEmbeddableDto> products,
-        @NotNull UserEmbeddableDto user
+        @NotNull List<ProductEmbeddableDto> products
 ) {
 }
