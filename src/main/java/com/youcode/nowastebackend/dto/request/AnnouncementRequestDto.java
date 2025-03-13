@@ -9,7 +9,7 @@ import java.util.List;
 public record AnnouncementRequestDto(
         @NotNull String title,
         @NotNull LocalDate createdAt,
-        @NotNull LocalDateTime postedDate,
+        LocalDateTime postedDate,
         List<ProductRequestDto> produits,
         @NotNull Long userId
 ) {

@@ -12,7 +12,12 @@ import org.springframework.validation.annotation.Validated;
 @Service
 @Validated
 @Transactional
-public class ReservationServiceImpl extends AbstractService<Reservation, ReservationRequestDto, ReservationResponseDto, Long> implements ReservationService {
+public class ReservationServiceImpl  implements ReservationService {
+    @Override
+    public ReservationResponseDto createReservation(ReservationRequestDto reservationRequestDto) {
+        return null;
+    }
+
     @Override
     public void cancelReservation(Long id) {
 

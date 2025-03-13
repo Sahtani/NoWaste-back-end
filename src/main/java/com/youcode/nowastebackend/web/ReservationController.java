@@ -9,11 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/reservations")
-public class ReservationController extends GenericController<ReservationRequestDto, ReservationResponseDto, Long> {
+public class ReservationController{
 
     private final ReservationService reservationService;
     public ReservationController(ReservationService reservationService) {
-        super(reservationService);
         this.reservationService = reservationService;
     }
 

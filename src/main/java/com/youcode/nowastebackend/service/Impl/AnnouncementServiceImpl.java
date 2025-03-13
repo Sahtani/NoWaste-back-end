@@ -8,7 +8,7 @@ import com.youcode.nowastebackend.dto.request.AnnouncementRequestDto;
 import com.youcode.nowastebackend.dto.response.AnnouncementResponseDto;
 import com.youcode.nowastebackend.entity.Announcement;
 import com.youcode.nowastebackend.entity.Product;
-import com.youcode.nowastebackend.entity.enums.AnnouncementStatus;
+import com.youcode.nowastebackend.entity.enums.Status;
 import com.youcode.nowastebackend.mapper.AnnouncementMapper;
 import com.youcode.nowastebackend.mapper.ProductMapper;
 import com.youcode.nowastebackend.repository.AnnouncementRepository;
@@ -109,11 +109,11 @@ public class AnnouncementServiceImpl extends AbstractService<Announcement, Annou
         Announcement announcement = announcementRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Announcement not found with id: " + id));
 
-        if (announcement.getStatus() != AnnouncementStatus.PENDING) {
+        if (announcement.getStatus() != Status.PENDING) {
             throw new IllegalStateException("Cannot approve announcement that is not in PENDING state");
         }
 
-        announcement.setStatus(AnnouncementStatus.APPROVED);
+        announcement.setStatus(Status.APPROVED);
         announcement.setPostedDate(LocalDateTime.now());
 
         Announcement approvedAnnouncement = announcementRepository.save(announcement);
@@ -127,7 +127,7 @@ public class AnnouncementServiceImpl extends AbstractService<Announcement, Annou
         Announcement announcement = announcementRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Announcement not found with id: " + id));
 
-        if (announcement.getStatus() != AnnouncementStatus.PENDING && announcement.getStatus() != AnnouncementStatus.APPROVED) {
+        if (announcement.getStatus() != Status.PENDING && announcement.getStatus() != Status.APPROVED) {
             throw new IllegalStateException("Cannot reject an announcement that is not in PENDING or APPROVED state");
         }
 
@@ -135,7 +135,7 @@ public class AnnouncementServiceImpl extends AbstractService<Announcement, Annou
             throw new IllegalArgumentException("Rejection reason cannot be empty");
         }
 
-        announcement.setStatus(AnnouncementStatus.REJECTED);
+        announcement.setStatus(Status.REJECTED);
         announcement.setRejectionReason(rejectionReason);
 
         return announcementMapper.toDto(announcementRepository.save(announcement));

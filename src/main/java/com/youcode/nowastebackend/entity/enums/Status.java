@@ -3,5 +3,8 @@ package com.youcode.nowastebackend.entity.enums;
 public enum Status  {
     PENDING,
     APPROVED,
-    REJECTED
+    REJECTED,
+    CONFIRMED,
+    CANCELLED,
+    COMPLETED
 }

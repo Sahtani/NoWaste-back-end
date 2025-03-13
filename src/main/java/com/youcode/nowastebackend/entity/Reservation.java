@@ -1,6 +1,7 @@
 package com.youcode.nowastebackend.entity;
 
 import com.youcode.nowastebackend.common.security.entity.AppUser;
+import com.youcode.nowastebackend.entity.enums.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,9 @@ public class Reservation {
 
     @ManyToOne
     private Announcement announcement;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @ManyToOne
     @JoinColumn(name = "beneficiary_id", nullable = false)

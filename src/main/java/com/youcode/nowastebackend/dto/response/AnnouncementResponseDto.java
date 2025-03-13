@@ -1,7 +1,7 @@
 package com.youcode.nowastebackend.dto.response;
 
 import com.youcode.nowastebackend.dto.embeddable.ProductEmbeddableDto;
-import com.youcode.nowastebackend.dto.embeddable.UserEmbeddableDto;
+import com.youcode.nowastebackend.entity.enums.Status;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
@@ -12,7 +12,8 @@ public record AnnouncementResponseDto(
         Long id ,
         @NotNull String title,
         @NotNull LocalDateTime createdAt,
-        @NotNull LocalDate postedDate,
+        LocalDate postedDate,
+        @NotNull Status status,
         @NotNull List<ProductEmbeddableDto> products
 ) {
 }
