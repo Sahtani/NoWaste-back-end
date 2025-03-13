@@ -11,5 +11,6 @@ public interface ReservationService {
     public ReservationResponseDto createReservation(ReservationRequestDto reservationRequestDto);
     public void updateReservationStatus(Long reservationId, Status newStatus);
     void cancelReservation(Long id);
+    public ReservationResponseDto getReservationById(Long id);
     public List<ReservationResponseDto> getAllReservations();
 }
