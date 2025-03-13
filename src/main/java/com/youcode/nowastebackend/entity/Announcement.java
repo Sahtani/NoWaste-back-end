@@ -1,7 +1,7 @@
 package com.youcode.nowastebackend.entity;
 
 import com.youcode.nowastebackend.common.security.entity.AppUser;
-import com.youcode.nowastebackend.entity.enums.AnnouncementStatus;
+import com.youcode.nowastebackend.entity.enums.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -29,15 +29,14 @@ public class Announcement {
 
     @NotNull private String title;
 
-    @NotNull
     private LocalDateTime postedDate;
 
     private LocalDate createdAt;
 
     @Enumerated(EnumType.STRING)
-    private AnnouncementStatus status = AnnouncementStatus.PENDING;
+    private Status status = Status.PENDING;
 
-    @Column(length = 500)
+    @Column(length = 255)
     private String rejectionReason;
 
     @OneToMany(mappedBy = "announcement", cascade = CascadeType.ALL)

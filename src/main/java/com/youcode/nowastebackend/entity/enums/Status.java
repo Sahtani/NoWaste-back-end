@@ -1,6 +1,6 @@
 package com.youcode.nowastebackend.entity.enums;
 
-public enum AnnouncementStatus {
+public enum Status  {
     PENDING,
     APPROVED,
     REJECTED
