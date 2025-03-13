@@ -16,13 +16,6 @@ import java.util.List;
 public class AdminAnnouncementController {
 
     private final AnnouncementService announcementService;
-    private final AnnouncementMapper announcementMapper;
-
-    @GetMapping("/pending")
-    public ResponseEntity<List<AnnouncementResponseDto>> getPendingAnnouncements() {
-        List<AnnouncementResponseDto> pendingAnnouncements = announcementService.getPendingAnnouncements();
-        return ResponseEntity.ok(pendingAnnouncements);
-    }
 
     @PutMapping("/{id}/approve")
     public ResponseEntity<AnnouncementResponseDto> approveAnnouncement(@PathVariable Long id) {
@@ -38,7 +31,6 @@ public class AdminAnnouncementController {
         return ResponseEntity.ok(rejectedAnnouncement);
     }
 
-    // Classe pour recevoir la raison du rejet
     @Data
     public static class RejectAnnouncementRequest {
         private String reason;

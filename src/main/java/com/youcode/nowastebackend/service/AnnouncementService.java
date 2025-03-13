@@ -9,5 +9,5 @@ import java.util.List;
 public interface AnnouncementService extends GenericService<AnnouncementRequestDto, AnnouncementResponseDto, Long>{
     AnnouncementResponseDto approveAnnouncement(Long id);
     AnnouncementResponseDto rejectAnnouncement(Long id, String rejectionReason);
-    List<AnnouncementResponseDto> getPendingAnnouncements();
+
 }
