@@ -55,6 +55,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/test/roles").authenticated()
                         .requestMatchers("/api/announcements/").hasRole("DONOR")
                         .requestMatchers("/api/products/**").permitAll()
+                        .requestMatchers("/api/reservations/**").permitAll()
+
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/association/**").hasRole("ASSOCIATION")
                         .anyRequest().authenticated())

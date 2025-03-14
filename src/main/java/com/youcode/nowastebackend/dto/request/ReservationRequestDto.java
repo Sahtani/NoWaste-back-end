@@ -6,8 +6,6 @@ import java.time.LocalDateTime;
 
 public record ReservationRequestDto(
         @NotNull LocalDateTime reservationDate,
-        @NotNull Long beneficiaryId,
-        @NotNull Long announcementId,
-        String status
+        @NotNull Long announcementId
 ) {
 }

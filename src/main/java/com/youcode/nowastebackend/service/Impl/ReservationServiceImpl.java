@@ -42,6 +42,9 @@ public class ReservationServiceImpl  implements ReservationService {
 
         Announcement announcement = announcementRepository.findById(requestDto.announcementId())
                 .orElseThrow(() -> new ResourceNotFoundException("Announcement not found with id: " + requestDto.announcementId()));
+        if (announcement.getStatus() == Status.REJECTED) {
+            throw new IllegalStateException("This Announcement has already been rejected and cannot be booked.");
+        }
 
         Reservation reservation = reservationMapper.toEntity(requestDto);
         reservation.setStatus(Status.PENDING);
