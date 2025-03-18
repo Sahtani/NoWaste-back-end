@@ -23,10 +23,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         AppUser user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
 
-        // Get the role name from user
         String roleName = user.getRole().getName();
 
-        // Ensure role name has ROLE_ prefix for Spring Security
         String formattedRole = roleName.startsWith("ROLE_") ? roleName : "ROLE_" + roleName;
 
         Collection<SimpleGrantedAuthority> authorities = Collections.singletonList(
