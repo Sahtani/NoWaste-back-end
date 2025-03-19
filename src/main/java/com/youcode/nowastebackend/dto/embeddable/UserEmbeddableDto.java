@@ -7,6 +7,5 @@ public record UserEmbeddableDto(@NotNull Long id,
                                 @NotBlank String name,
                                 @NotBlank String email,
                                 @NotBlank String password,
-                                @NotBlank String phone,
-                                @NotBlank RoleEmbeddableDto role) {
+                                @NotBlank String phone) {
 }

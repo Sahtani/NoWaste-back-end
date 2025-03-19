@@ -74,11 +74,14 @@ public class AnnouncementServiceImpl extends AbstractService<Announcement, Annou
         Announcement announcement = announcementRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Announcement not found"));
 
-        AppUser user = appUserRepository.findById(requestDto.userId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
 
-        announcement.setCreatedAt(requestDto.createdAt());
-        announcement.setPostedDate(requestDto.postedDate());
+        AppUser user = appUserRepository.findByEmail(username)
+                .orElseThrow(() -> new EntityNotFoundException("User not found: " + username));
+announcement.setTitle(requestDto.title());
+        announcement.setCreatedAt(LocalDate.now());
+      //  announcement.setPostedDate(requestDto.postedDate());
         announcement.setUser(user);
 
         if (requestDto.produits() != null && !requestDto.produits().isEmpty()) {
