@@ -27,20 +27,16 @@ public class ImageUploadController {
     @PostMapping("/upload")
     public ResponseEntity<Map<String, String>> uploadImage(@RequestParam("image") MultipartFile file) {
         try {
-            // Créer le répertoire de destination si nécessaire
             File directory = new File(uploadDir);
             if (!directory.exists()) {
                 directory.mkdirs();
             }
 
-            // Générer un nom de fichier unique pour éviter les conflits
             String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
             Path filePath = Paths.get(uploadDir, fileName);
 
-            // Enregistrer le fichier
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-            // Construire l'URL de l'image
             String imageUrl = "/api/images/" + fileName;
 
             Map<String, String> response = new HashMap<>();

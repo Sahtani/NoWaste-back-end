@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: NoWaste-back-end
+  datasource:
+    url: jdbc:postgresql://localhost:5432/nowaste  # Utiliser "postgres" comme host en environnement Docker
+    username: postgres
+    password: soumia
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 300000
+      connection-timeout: 20000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        id:
+          new_generator_mappings: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+
+jwt:
+  secret: Gz1yS8hN3qU3bV5mT8pW2xY7sB9cD1jL4rP6nQ8oF2kT7mW5yZ9pC3kL6vM8xR1g2zW2a6J9K1sH6Y5R3cT2
+  expirationMs: 3600000
+
+file:
+  upload-dir: uploads/

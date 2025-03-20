@@ -21,33 +21,38 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-
+import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
 
 @Service
 @Validated
 @Transactional
 public class AnnouncementServiceImpl extends AbstractService<Announcement, AnnouncementRequestDto, AnnouncementResponseDto, Long> implements AnnouncementService {
 
+    private static final Logger logger = LoggerFactory.getLogger(AnnouncementService.class);
     private final AnnouncementRepository announcementRepository;
     private final AnnouncementMapper announcementMapper;
     private final AppUserRepository appUserRepository;
     private final ProductMapper productMapper;
     private final ProductRepository productRepository;
-    private static final Logger logger = LoggerFactory.getLogger(AnnouncementService.class);
-    public AnnouncementServiceImpl(AnnouncementRepository announcementRepository, AnnouncementMapper announcementMapper, AppUserRepository appUserRepository, ProductRepository productRepository, ProductMapper productMapper, ProductRepository productRepository1) {
+    private final ImageService imageService;
+
+    public AnnouncementServiceImpl(AnnouncementRepository announcementRepository, AnnouncementMapper announcementMapper, AppUserRepository appUserRepository, ProductRepository productRepository, ProductMapper productMapper, ProductRepository productRepository1, ImageService imageService) {
         super(announcementRepository, announcementMapper);
         this.announcementRepository = announcementRepository;
         this.announcementMapper = announcementMapper;
         this.appUserRepository = appUserRepository;
         this.productMapper = productMapper;
         this.productRepository = productRepository1;
+        this.imageService = imageService;
     }
 
     @Override
-    public AnnouncementResponseDto save(AnnouncementRequestDto requestDto) {
+    public AnnouncementResponseDto save(AnnouncementRequestDto requestDto, List<MultipartFile> productImages) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
@@ -55,15 +60,26 @@ public class AnnouncementServiceImpl extends AbstractService<Announcement, Annou
                 .orElseThrow(() -> new EntityNotFoundException("User not found: " + username));
         Announcement announcement = announcementMapper.toEntity(requestDto);
         announcement.setUser(user);
-    //    AppUser user = appUserRepository.findById(requestDto.userId()).orElseThrow(() -> new RuntimeException("User not found"));
 
         announcement.setCreatedAt(LocalDate.now());
         if (requestDto.produits() != null && !requestDto.produits().isEmpty()) {
-            List<Product> products = requestDto.produits().stream().map(productRequestDto -> {
-                Product product = productMapper.toEntity(productRequestDto);
-                product.setAnnouncement(announcement);
-                return product;
-            }).toList();
+            AtomicInteger counter = new AtomicInteger(0);
+
+            List<Product> products = requestDto.produits().stream()
+                    .map(productRequestDto -> {
+                        Product product = productMapper.toEntity(productRequestDto);
+                        product.setAnnouncement(announcement);
+
+                        int i = counter.getAndIncrement();
+                        if (productImages != null && i < productImages.size() && !productImages.get(i).isEmpty()) {
+                            String imageUrl = imageService.saveImage(productImages.get(i));
+                            product.setImage(imageUrl);
+                        }
+
+                        return product;
+                    })
+                    .toList();
+
             announcement.setProducts(products);
         }
         Announcement savedAnnouncement = announcementRepository.save(announcement);
@@ -79,9 +95,9 @@ public class AnnouncementServiceImpl extends AbstractService<Announcement, Annou
 
         AppUser user = appUserRepository.findByEmail(username)
                 .orElseThrow(() -> new EntityNotFoundException("User not found: " + username));
-announcement.setTitle(requestDto.title());
+        announcement.setTitle(requestDto.title());
         announcement.setCreatedAt(LocalDate.now());
-      //  announcement.setPostedDate(requestDto.postedDate());
+        //  announcement.setPostedDate(requestDto.postedDate());
         announcement.setUser(user);
 
         if (requestDto.produits() != null && !requestDto.produits().isEmpty()) {
@@ -143,7 +159,5 @@ announcement.setTitle(requestDto.title());
 
         return announcementMapper.toDto(announcementRepository.save(announcement));
     }
-
-
 
 }

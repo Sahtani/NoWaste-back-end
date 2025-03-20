@@ -16,7 +16,6 @@ public record ProductRequestDto(
         @NotNull LocalDateTime expirationDate,
         @NotBlank String location,
         @NotBlank String image,
-        ProductStatus status,
-       @NotNull Long announcementId
+        ProductStatus status
 ) {
 }
