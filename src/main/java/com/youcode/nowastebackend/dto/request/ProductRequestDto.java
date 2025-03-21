@@ -4,6 +4,7 @@ import com.youcode.nowastebackend.entity.enums.ProductStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public record ProductRequestDto(
@@ -13,7 +14,7 @@ public record ProductRequestDto(
         @NotBlank String description,
         @NotNull Double price,
         @NotNull Integer quantity,
-        @NotNull LocalDateTime expirationDate,
+        @NotNull LocalDate expirationDate,
         @NotBlank String location,
         @NotBlank String image,
         ProductStatus status

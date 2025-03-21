@@ -36,7 +36,7 @@ public class Product {
     private Integer quantity;
 
     @Column(nullable = false)
-    private LocalDateTime expirationDate;
+    private LocalDate expirationDate;
 
 
     @Column(nullable = false)

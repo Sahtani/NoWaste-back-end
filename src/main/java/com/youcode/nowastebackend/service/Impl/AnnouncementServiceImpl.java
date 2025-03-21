@@ -62,10 +62,10 @@ public class AnnouncementServiceImpl extends AbstractService<Announcement, Annou
         announcement.setUser(user);
 
         announcement.setCreatedAt(LocalDate.now());
-        if (requestDto.produits() != null && !requestDto.produits().isEmpty()) {
+        if (requestDto.products() != null && !requestDto.products().isEmpty()) {
             AtomicInteger counter = new AtomicInteger(0);
 
-            List<Product> products = requestDto.produits().stream()
+            List<Product> products = requestDto.products().stream()
                     .map(productRequestDto -> {
                         Product product = productMapper.toEntity(productRequestDto);
                         product.setAnnouncement(announcement);
@@ -99,9 +99,10 @@ public class AnnouncementServiceImpl extends AbstractService<Announcement, Annou
         announcement.setCreatedAt(LocalDate.now());
         //  announcement.setPostedDate(requestDto.postedDate());
         announcement.setUser(user);
+        logger.info("Updating announcement: " + announcement.getTitle());
 
-        if (requestDto.produits() != null && !requestDto.produits().isEmpty()) {
-            List<Product> updatedProducts = requestDto.produits().stream().map(productRequestDto -> {
+        if (requestDto.products() != null && !requestDto.products().isEmpty()) {
+            List<Product> updatedProducts = requestDto.products().stream().map(productRequestDto -> {
                 if (productRequestDto.id() != null) {
                     Product product = productRepository.findById(productRequestDto.id())
                             .orElseThrow(() -> new RuntimeException("Product not found: " + productRequestDto.id()));

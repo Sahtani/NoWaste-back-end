@@ -10,7 +10,7 @@ public record AnnouncementRequestDto(
         @NotNull String title,
         @NotNull LocalDate createdAt,
         LocalDateTime postedDate,
-        @NotNull  List<ProductRequestDto> produits,
+        @NotNull  List<ProductRequestDto> products,
         @NotNull Long userId
 ) {
 }
