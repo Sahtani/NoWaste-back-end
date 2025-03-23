@@ -23,13 +23,13 @@ public class UserController extends GenericController<AppUserRequestDto, AppUser
         this.userService = userService;
     }
     @Override
-    @PostMapping("/public/register")
+    @PostMapping("/register")
     public ResponseEntity<AppUserResponseDto> create(@RequestBody AppUserRequestDto requestDto) {
         AppUserResponseDto responseDto = service.save(requestDto);
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
 
-    @PostMapping("/public/login")
+    @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto requestDto) {
         LoginResponseDto responseDto = userService.login(requestDto);
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
