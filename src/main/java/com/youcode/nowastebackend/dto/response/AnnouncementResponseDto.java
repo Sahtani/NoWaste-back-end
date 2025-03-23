@@ -13,9 +13,8 @@ public record AnnouncementResponseDto(
         Long id ,
         @NotNull String title,
         @NotNull LocalDateTime createdAt,
-        LocalDate postedDate,
         @NotNull Status status,
         List<ProductEmbeddableDto> products,
-        @NotNull UserEmbeddableDto user
+        @NotNull UserEmbeddableDto donor
 ) {
 }

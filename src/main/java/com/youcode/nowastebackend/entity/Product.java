@@ -27,7 +27,7 @@ public class Product {
     @Column(nullable = false)
     private String category;
 
-    @Column(nullable = false)
+    @Column(nullable = false,columnDefinition = "TEXT")
     private String description;
 
     private Double price;
@@ -35,21 +35,36 @@ public class Product {
     @Column(nullable = false)
     private Integer quantity;
 
-    @Column(nullable = false)
+    @Column(name = "expiry_date" ,nullable = false)
     private LocalDate expirationDate;
 
-
-    @Column(nullable = false)
-    private String location;
 
     private String image;
 
     private ProductStatus status;
 
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @Column(columnDefinition = "TEXT")
+    private String additionalDetails;
+
     @ManyToOne
     private Announcement announcement;
 
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
 
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 
 
 }

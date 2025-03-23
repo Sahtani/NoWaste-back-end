@@ -10,6 +10,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -41,20 +43,44 @@ public class AnnouncementController extends GenericController<AnnouncementReques
         AnnouncementResponseDto responseDto = announcementService.save(announcementRequest, productImages);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
+    @GetMapping("/donor")
+    public ResponseEntity<List<AnnouncementResponseDto>> getMyAnnouncements(
+            @AuthenticationPrincipal UserDetails userDetails) {
 
-    /*@GetMapping("/images/{fileName:.+}")
-    public ResponseEntity<Resource> getImage(@PathVariable String fileName) {
-        Resource resource = imageService.loadImageAsResource(fileName);
+        List<AnnouncementResponseDto> announcements = announcementService.getAnnouncementsByDonor(
+                userDetails.getUsername());
 
-        try {
-            Path filePath = Paths.get("uploads/images", fileName);
-            String contentType = Files.probeContentType(filePath);
+        return ResponseEntity.ok(announcements);
+    }
 
-            return ResponseEntity.ok()
-                    .contentType(contentType != null ? MediaType.parseMediaType(contentType) : MediaType.IMAGE_JPEG)
-                    .body(resource);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to determine file type", e);
-        }
-    }*/
+    @PostMapping("/{id}/interest")
+    public ResponseEntity<AnnouncementResponseDto> markInterest(
+            @PathVariable Long id,
+            @AuthenticationPrincipal UserDetails userDetails) {
+
+        AnnouncementResponseDto announcement = announcementService.markInterest(id, userDetails.getUsername());
+        return ResponseEntity.ok(announcement);
+    }
+
+    @PostMapping("/{id}/approve/{beneficiaryId}")
+    public ResponseEntity<AnnouncementResponseDto> approveInterest(
+            @PathVariable Long id,
+            @PathVariable Long beneficiaryId,
+            @AuthenticationPrincipal UserDetails userDetails) {
+
+        AnnouncementResponseDto announcement = announcementService.approveInterest(
+                id, beneficiaryId, userDetails.getUsername());
+
+        return ResponseEntity.ok(announcement);
+    }
+
+    @PostMapping("/{id}/confirm")
+    public ResponseEntity<AnnouncementResponseDto> confirmCollection(
+            @PathVariable Long id,
+            @AuthenticationPrincipal UserDetails userDetails) {
+
+        AnnouncementResponseDto announcement = announcementService.confirmCollection(id, userDetails.getUsername());
+        return ResponseEntity.ok(announcement);
+    }
+
 }

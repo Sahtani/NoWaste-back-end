@@ -8,8 +8,7 @@ import java.util.List;
 
 public record AnnouncementRequestDto(
         @NotNull String title,
-        @NotNull LocalDate createdAt,
-        LocalDateTime postedDate,
+      @NotNull  String location,
         @NotNull  List<ProductRequestDto> products
 ) {
 }

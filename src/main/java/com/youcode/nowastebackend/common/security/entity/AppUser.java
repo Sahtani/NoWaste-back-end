@@ -1,6 +1,8 @@
 package com.youcode.nowastebackend.common.security.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.youcode.nowastebackend.entity.Announcement;
+import com.youcode.nowastebackend.entity.Rating;
 import com.youcode.nowastebackend.entity.Reservation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,8 +15,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @SuperBuilder
 @SoftDelete
@@ -41,13 +43,25 @@ public class AppUser implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @Column( nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String address;
+
+    @Column(columnDefinition = "TEXT")
+    private String bio;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @Column(name = "last_login")
+    private LocalDateTime lastLogin;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private AppRole role;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "donor", cascade = CascadeType.ALL)
     private List<Announcement> announcements;
 
     @OneToMany(mappedBy = "beneficiary")
@@ -63,5 +77,36 @@ public class AppUser implements UserDetails {
     @Override
     public String getUsername() {
         return "";
+    }
+
+    @ElementCollection
+    @CollectionTable(name = "user_privacy_settings",
+            joinColumns = @JoinColumn(name = "user_id"))
+    @MapKeyColumn(name = "setting_key")
+    @Column(name = "setting_value")
+    private Map<String, Boolean> privacySettings = new HashMap<>();
+
+    @OneToMany(mappedBy = "ratedUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Rating> ratings = new ArrayList<>();
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+
+        // Default privacy settings
+        if (this.privacySettings == null) {
+            this.privacySettings = new HashMap<>();
+            this.privacySettings.put("showEmail", false);
+            this.privacySettings.put("showPhone", false);
+            this.privacySettings.put("showAddress", false);
+            this.privacySettings.put("receiveNotifications", true);
+        }
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
     }
 }

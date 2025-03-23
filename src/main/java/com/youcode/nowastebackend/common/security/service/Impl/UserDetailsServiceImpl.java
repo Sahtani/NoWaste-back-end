@@ -1,5 +1,6 @@
 package com.youcode.nowastebackend.common.security.service.Impl;
 
+import com.youcode.nowastebackend.common.exception.ResourceNotFoundException;
 import com.youcode.nowastebackend.common.security.config.Jwt.JwtUtils;
 import com.youcode.nowastebackend.common.security.dto.password.ChangePasswordDto;
 import com.youcode.nowastebackend.common.security.dto.request.AppUserRequestDto;
@@ -207,6 +208,60 @@ public class UserDetailsServiceImpl implements UserService {
 
         user.setPassword(passwordEncoder.encode(changePasswordDto.newPassword()));
         userRepository.save(user);
+    }
+
+    @Transactional
+    public void verifyAccount(String token) {
+       /* VerificationToken verificationToken = tokenRepository.findByToken(token)
+                .orElseThrow(() -> new BadRequestException("Invalid verification token"));
+
+        if (verificationToken.getExpiryDate().isBefore(LocalDateTime.now())) {
+            throw new BadRequestException("Verification token has expired");
+        }
+
+        User user = verificationToken.getUser();
+        user.setVerified(true);
+        userRepository.save(user);
+
+        // Delete used token
+        tokenRepository.delete(verificationToken);*/
+    }
+
+    @Transactional
+    public void sendPasswordResetEmail(String email) {
+       /* AppUser user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + email));
+
+        String token = UUID.randomUUID().toString();
+        VerificationToken resetToken = new VerificationToken();
+        resetToken.setToken(token);
+        resetToken.setUser(user);
+        resetToken.setExpiryDate(LocalDateTime.now().plusHours(1));
+        resetToken.setTokenType("PASSWORD_RESET");
+        tokenRepository.save(resetToken);
+
+        String subject = "NoWaste Password Reset";
+        String content = "Please click on the link to reset your password: " +
+                "http://your-app-url/reset-password?token=" + token;
+        emailService.sendEmail(user.getEmail(), subject, content);*/
+    }
+
+    @Transactional
+    public void resetPassword(String token, String newPassword) {/*
+        VerificationToken resetToken = tokenRepository.findByTokenAndTokenType(token, "PASSWORD_RESET")
+                .orElseThrow(() -> new BadRequestException("Invalid password reset token"));
+
+        if (resetToken.getExpiryDate().isBefore(LocalDateTime.now())) {
+            throw new BadRequestException("Password reset token has expired");
+        }
+
+        User user = resetToken.getUser();
+        user.setPassword(passwordEncoder.encode(newPassword));
+        user.setUpdatedAt(LocalDateTime.now());
+        userRepository.save(user);
+
+        // Delete used token
+        tokenRepository.delete(resetToken);*/
     }
 
 }

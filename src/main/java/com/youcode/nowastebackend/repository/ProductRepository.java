@@ -20,4 +20,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("date") LocalDate date
     );
 
+    @Query("SELECT p FROM Product p WHERE p.name LIKE %:keyword% OR p.description LIKE %:keyword%")
+    List<Product> searchByKeyword(@Param("keyword") String keyword);
+
+    @Query("SELECT p FROM Product p WHERE p.expirationDate IS NOT NULL AND p.expirationDate > CURRENT_TIMESTAMP ORDER BY p.expirationDate ASC")
+    List<Product> findExpiringSoon();
+
 }
