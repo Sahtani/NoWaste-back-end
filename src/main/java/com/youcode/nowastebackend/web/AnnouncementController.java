@@ -42,5 +42,19 @@ public class AnnouncementController extends GenericController<AnnouncementReques
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
+    /*@GetMapping("/images/{fileName:.+}")
+    public ResponseEntity<Resource> getImage(@PathVariable String fileName) {
+        Resource resource = imageService.loadImageAsResource(fileName);
 
+        try {
+            Path filePath = Paths.get("uploads/images", fileName);
+            String contentType = Files.probeContentType(filePath);
+
+            return ResponseEntity.ok()
+                    .contentType(contentType != null ? MediaType.parseMediaType(contentType) : MediaType.IMAGE_JPEG)
+                    .body(resource);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to determine file type", e);
+        }
+    }*/
 }

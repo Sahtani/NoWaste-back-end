@@ -37,7 +37,7 @@ public class ImageUploadController {
 
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-            String imageUrl = "/api/images/" + fileName;
+            String imageUrl = "/api/announcements/images/" + fileName;
 
             Map<String, String> response = new HashMap<>();
             response.put("imageUrl", imageUrl);
