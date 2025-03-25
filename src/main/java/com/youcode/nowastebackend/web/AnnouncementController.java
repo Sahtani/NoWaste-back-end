@@ -1,6 +1,7 @@
 package com.youcode.nowastebackend.web;
 
 import com.youcode.nowastebackend.common.controller.GenericController;
+import com.youcode.nowastebackend.common.security.dto.response.AppUserResponseDto;
 import com.youcode.nowastebackend.dto.request.AnnouncementRequestDto;
 import com.youcode.nowastebackend.dto.response.AnnouncementResponseDto;
 import com.youcode.nowastebackend.service.AnnouncementService;

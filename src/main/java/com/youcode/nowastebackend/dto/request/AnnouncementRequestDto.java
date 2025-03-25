@@ -8,7 +8,8 @@ import java.util.List;
 
 public record AnnouncementRequestDto(
         @NotNull String title,
-      @NotNull  String location,
+        @NotNull  String location,
         @NotNull  List<ProductRequestDto> products
+
 ) {
 }

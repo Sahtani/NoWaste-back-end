@@ -1,8 +1,7 @@
 package com.youcode.nowastebackend.common.security.dto.response;
 
-import jakarta.validation.constraints.NotNull;
-
 public record LoginResponseDto(
+        String name,
          String email,
          String role,
          String token,

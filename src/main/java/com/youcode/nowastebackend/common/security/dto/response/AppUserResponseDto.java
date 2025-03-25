@@ -1,7 +1,5 @@
 package com.youcode.nowastebackend.common.security.dto.response;
 
-import com.youcode.nowastebackend.common.security.entity.AppRole;
-import com.youcode.nowastebackend.dto.embeddable.RoleEmbeddableDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

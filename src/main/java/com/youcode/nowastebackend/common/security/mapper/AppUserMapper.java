@@ -7,16 +7,17 @@ import com.youcode.nowastebackend.common.security.entity.AppRole;
 import com.youcode.nowastebackend.common.security.entity.AppUser;
 import com.youcode.nowastebackend.common.security.repository.AppRoleRepository;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper(componentModel = "spring")
-
-public interface AppUserMapper extends GenericMapper<AppUser, AppUserRequestDto, AppUserResponseDto> {
+public abstract class AppUserMapper implements GenericMapper<AppUser, AppUserRequestDto, AppUserResponseDto> {
 
     @Autowired
-    AppRoleRepository appRoleRepository = null;
+    protected AppRoleRepository appRoleRepository;
 
-    default AppRole map(String roleName) {
+    // Méthode pour mapper une chaîne vers un AppRole
+    public AppRole map(String roleName) {
         if (roleName == null) {
             return null;
         }
@@ -25,4 +26,10 @@ public interface AppUserMapper extends GenericMapper<AppUser, AppUserRequestDto,
                 .orElseThrow(() -> new IllegalArgumentException("Role not found: " + roleName));
     }
 
+    // Méthode pour mapper un AppRole vers une chaîne
+    public String map(AppRole role) {
+        return role != null ? role.getName() : null;
+    }
+
+    // Les autres méthodes de mappage seront implémentées automatiquement par MapStruct
 }

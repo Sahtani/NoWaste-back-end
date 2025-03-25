@@ -33,13 +33,13 @@ public class UserController extends GenericController<AppUserRequestDto, AppUser
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
 
-    @GetMapping("/profile")
-    public ResponseEntity<AppUserResponseDto> findById(@RequestParam Long id) {
+    @GetMapping("/profile/{id}")
+    public ResponseEntity<AppUserResponseDto> findById(@PathVariable Long id) {
         AppUserResponseDto responseDto = userService.findById(id);
         return new ResponseEntity<>(responseDto,HttpStatus.CREATED);
     }
-    @PutMapping("/profile")
-    public ResponseEntity<AppUserResponseDto> update(@RequestParam Long id, @RequestBody AppUserRequestDto requestDto) {
+    @PutMapping("/profile/{id}")
+    public ResponseEntity<AppUserResponseDto> update(@PathVariable Long id, @RequestBody AppUserRequestDto requestDto) {
         AppUserResponseDto responseDto = userService.update(id, requestDto);
         return new ResponseEntity<>(responseDto,HttpStatus.CREATED);
     }
@@ -63,6 +63,7 @@ public class UserController extends GenericController<AppUserRequestDto, AppUser
         userService.verifyAccount(token);
         return ResponseEntity.ok(new ApiResponse(true, "Account verified successfully"));
     }
+
 
 
 }

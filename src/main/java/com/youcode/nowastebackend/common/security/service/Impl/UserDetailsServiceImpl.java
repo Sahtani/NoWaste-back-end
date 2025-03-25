@@ -120,6 +120,7 @@ public class UserDetailsServiceImpl implements UserService {
                 .orElse("ROLE_USER");
 
         return new LoginResponseDto(
+                user.getName(),
                 user.getEmail(),
                 role,
                 token,

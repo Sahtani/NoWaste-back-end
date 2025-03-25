@@ -2,7 +2,7 @@ spring:
   application:
     name: NoWaste-back-end
   datasource:
-    url: jdbc:postgresql://localhost:5432/nowaste  # Utiliser "postgres" comme host en environnement Docker
+    url: jdbc:postgresql://localhost:5432/nowaste
     username: postgres
     password: soumia
     driver-class-name: org.postgresql.Driver

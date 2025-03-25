@@ -15,7 +15,6 @@ public record ProductRequestDto(
         @NotNull Double price,
         @NotNull Integer quantity,
         @NotNull LocalDate expirationDate,
-        @NotBlank String location,
         @NotBlank String image,
         ProductStatus status
 ) {
