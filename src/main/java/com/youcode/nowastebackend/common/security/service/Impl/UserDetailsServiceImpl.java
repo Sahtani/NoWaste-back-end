@@ -5,6 +5,7 @@ import com.youcode.nowastebackend.common.security.config.Jwt.JwtUtils;
 import com.youcode.nowastebackend.common.security.dto.password.ChangePasswordDto;
 import com.youcode.nowastebackend.common.security.dto.request.AppUserRequestDto;
 import com.youcode.nowastebackend.common.security.dto.request.LoginRequestDto;
+import com.youcode.nowastebackend.common.security.dto.request.UpdateUserRequestDto;
 import com.youcode.nowastebackend.common.security.dto.response.AppUserResponseDto;
 import com.youcode.nowastebackend.common.security.dto.response.LoginResponseDto;
 import com.youcode.nowastebackend.common.security.entity.AppRole;
@@ -30,6 +31,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -62,6 +64,11 @@ public class UserDetailsServiceImpl implements UserService {
     }
 
     @Override
+    public AppUserResponseDto update(Long aLong, AppUserRequestDto requestDto) {
+        return null;
+    }
+
+    @Override
     public AppUserResponseDto createNewUser(AppUserRequestDto requestDto, AppRole role) {
         log.info("Creating a new user with role: {}", role.getName());
 
@@ -91,6 +98,10 @@ public class UserDetailsServiceImpl implements UserService {
                 savedUser.getName(),
                 savedUser.getEmail(),
                 savedUser.getPassword(),
+                savedUser.getPhone(),
+                savedUser.getAddress(),
+                savedUser.getLastLogin(),
+                savedUser.getRole().getName(),
                 token);
     }
 
@@ -119,6 +130,9 @@ public class UserDetailsServiceImpl implements UserService {
                 .map(GrantedAuthority::getAuthority)
                 .orElse("ROLE_USER");
 
+        user.setLastLogin(LocalDateTime.now());
+        userRepository.save(user);
+
         return new LoginResponseDto(
                 user.getName(),
                 user.getEmail(),
@@ -128,8 +142,8 @@ public class UserDetailsServiceImpl implements UserService {
         );
     }
 
-    @Override
-    public AppUserResponseDto update(Long id, AppUserRequestDto requestDto) {
+
+    public AppUserResponseDto update(Long id, UpdateUserRequestDto requestDto) {
         AppUser user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
 
@@ -145,15 +159,6 @@ public class UserDetailsServiceImpl implements UserService {
         if (requestDto.address() != null) {
             user.setAddress(requestDto.address());
         }
-        if (requestDto.password() != null) {
-            user.setPassword(passwordEncoder.encode(requestDto.password()));
-        }
-        if (requestDto.role() != null) {
-            AppRole role = roleRepository.findByName(requestDto.role())
-                    .orElseThrow(() -> new RuntimeException("Role not found: " + requestDto.role()));
-            user.setRole(role);
-        }
-
         AppUser updatedUser = userRepository.save(user);
         return userMapper.toDto(updatedUser);
     }

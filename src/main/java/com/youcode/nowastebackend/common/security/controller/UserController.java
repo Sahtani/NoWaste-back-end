@@ -4,6 +4,7 @@ import com.youcode.nowastebackend.common.controller.GenericController;
 import com.youcode.nowastebackend.common.security.dto.ApiResponse;
 import com.youcode.nowastebackend.common.security.dto.request.AppUserRequestDto;
 import com.youcode.nowastebackend.common.security.dto.request.LoginRequestDto;
+import com.youcode.nowastebackend.common.security.dto.request.UpdateUserRequestDto;
 import com.youcode.nowastebackend.common.security.dto.response.AppUserResponseDto;
 import com.youcode.nowastebackend.common.security.dto.response.LoginResponseDto;
 import com.youcode.nowastebackend.common.security.service.UserService;
@@ -39,7 +40,7 @@ public class UserController extends GenericController<AppUserRequestDto, AppUser
         return new ResponseEntity<>(responseDto,HttpStatus.CREATED);
     }
     @PutMapping("/profile/{id}")
-    public ResponseEntity<AppUserResponseDto> update(@PathVariable Long id, @RequestBody AppUserRequestDto requestDto) {
+    public ResponseEntity<AppUserResponseDto> update(@PathVariable Long id, @RequestBody UpdateUserRequestDto requestDto) {
         AppUserResponseDto responseDto = userService.update(id, requestDto);
         return new ResponseEntity<>(responseDto,HttpStatus.CREATED);
     }
