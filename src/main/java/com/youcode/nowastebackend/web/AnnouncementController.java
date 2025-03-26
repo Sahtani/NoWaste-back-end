@@ -27,11 +27,9 @@ import java.util.List;
 public class AnnouncementController extends GenericController<AnnouncementRequestDto, AnnouncementResponseDto, Long> {
 
     private final AnnouncementService  announcementService;
-    private final ImageService imageService;
-    public AnnouncementController(AnnouncementService announcementService, ImageService imageService) {
+    public AnnouncementController(AnnouncementService announcementService) {
         super(announcementService);
         this.announcementService = announcementService;
-        this.imageService = imageService;
     }
 
 
@@ -44,7 +42,8 @@ public class AnnouncementController extends GenericController<AnnouncementReques
         AnnouncementResponseDto responseDto = announcementService.save(announcementRequest, productImages);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
-    @GetMapping("/donor")
+
+   /* @GetMapping("/donor")
     public ResponseEntity<List<AnnouncementResponseDto>> getMyAnnouncements(
             @AuthenticationPrincipal UserDetails userDetails) {
 
@@ -52,7 +51,7 @@ public class AnnouncementController extends GenericController<AnnouncementReques
                 userDetails.getUsername());
 
         return ResponseEntity.ok(announcements);
-    }
+    }*/
 
     @PostMapping("/{id}/interest")
     public ResponseEntity<AnnouncementResponseDto> markInterest(

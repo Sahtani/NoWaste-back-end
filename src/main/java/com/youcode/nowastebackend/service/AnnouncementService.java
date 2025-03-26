@@ -11,7 +11,7 @@ public interface AnnouncementService extends GenericService<AnnouncementRequestD
     AnnouncementResponseDto save(AnnouncementRequestDto requestDto, List<MultipartFile> productImages);
     AnnouncementResponseDto approveAnnouncement(Long id);
     AnnouncementResponseDto rejectAnnouncement(Long id, String rejectionReason);
-    List<AnnouncementResponseDto> getAnnouncementsByDonor(String username);
+  //  List<AnnouncementResponseDto> getAnnouncementsByDonor(String username);
     AnnouncementResponseDto markInterest(Long announcementId, String username);
     AnnouncementResponseDto confirmCollection(Long announcementId, String username);
     AnnouncementResponseDto approveInterest(Long announcementId, Long beneficiaryId, String username);

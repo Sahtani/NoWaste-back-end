@@ -101,6 +101,7 @@ public class UserDetailsServiceImpl implements UserService {
                 savedUser.getPhone(),
                 savedUser.getAddress(),
                 savedUser.getLastLogin(),
+                savedUser.getBio(),
                 savedUser.getRole().getName(),
                 token);
     }
@@ -158,6 +159,9 @@ public class UserDetailsServiceImpl implements UserService {
         }
         if (requestDto.address() != null) {
             user.setAddress(requestDto.address());
+        }
+        if (requestDto.bio() != null) {
+            user.setBio(requestDto.bio());
         }
         AppUser updatedUser = userRepository.save(user);
         return userMapper.toDto(updatedUser);

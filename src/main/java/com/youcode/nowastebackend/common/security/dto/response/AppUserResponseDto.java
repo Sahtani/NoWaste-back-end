@@ -13,6 +13,7 @@ public record AppUserResponseDto(
         @NotBlank String phone,
         @NotBlank String address,
         LocalDateTime lastLogin,
+        String bio,
         String role,
         String token
 ) {

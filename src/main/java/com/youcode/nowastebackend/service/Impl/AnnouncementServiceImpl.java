@@ -160,13 +160,13 @@ public class AnnouncementServiceImpl extends AbstractService<Announcement, Annou
         return announcementMapper.toDto(announcementRepository.save(announcement));
     }
 
-    @Override
+  /*  @Override
     public List<AnnouncementResponseDto> getAnnouncementsByDonor(String username) {
         AppUser donor = appUserRepository.findByName(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with username: " + username));
 
         return announcementRepository.findByDonorId(donor.getId());
-    }
+    }*/
 
     @Transactional
     public AnnouncementResponseDto markInterest(Long announcementId, String username) {

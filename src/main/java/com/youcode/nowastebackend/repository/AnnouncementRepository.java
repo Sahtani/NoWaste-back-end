@@ -12,7 +12,7 @@ import java.util.List;
 public interface AnnouncementRepository extends JpaRepository<Announcement, Long> {
 
 
-    List<AnnouncementResponseDto> findByDonorId(Long donorId);
+    List<Announcement> findByDonorId(Long donorId);
 
     List<Announcement> findByBeneficiaryId(Long beneficiaryId);
 
