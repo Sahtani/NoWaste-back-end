@@ -45,5 +45,20 @@ public class ReservationController {
     public ResponseEntity<List<ReservationResponseDto>> getAllReservations() {
         return ResponseEntity.ok(reservationService.getAllReservations());
     }
+
+    @GetMapping("/active")
+    public ResponseEntity<List<ReservationResponseDto>> getActiveReservations() {
+        return ResponseEntity.ok(reservationService.getActiveReservations());
+    }
+
+    @GetMapping("/upcoming")
+    public ResponseEntity<List<ReservationResponseDto>> getUpcomingCollections() {
+        return ResponseEntity.ok(reservationService.getUpcomingCollections());
+    }
+
+    @GetMapping("/history")
+    public ResponseEntity<List<ReservationResponseDto>> getCollectionHistory() {
+        return ResponseEntity.ok(reservationService.getCollectionHistory());
+    }
 }
 

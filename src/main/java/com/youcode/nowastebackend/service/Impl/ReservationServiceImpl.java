@@ -20,13 +20,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Validated
-@Transactional
 @RequiredArgsConstructor
 public class ReservationServiceImpl  implements ReservationService {
+
     private final ReservationRepository reservationRepository;
     private final ReservationMapper reservationMapper;
     private final AppUserRepository appUserRepository;
@@ -86,5 +88,25 @@ public class ReservationServiceImpl  implements ReservationService {
                 .stream()
                 .map(reservationMapper::toDto)
                 .toList();
+    }
+
+    @Override
+    public List<ReservationResponseDto> getActiveReservations() {
+        List<Reservation> reservations = reservationRepository.findByStatus(Status.ACTIVE);
+        return reservations.stream().map(reservationMapper::toDto).collect(Collectors.toList());
+    }
+
+
+    @Override
+    public List<ReservationResponseDto> getUpcomingCollections() {
+        LocalDateTime now = LocalDateTime.now();
+        List<Reservation> reservations = reservationRepository.findByStatusAndReservationDateAfter(Status.RESERVED, now);
+        return reservations.stream().map(reservationMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ReservationResponseDto> getCollectionHistory() {
+        List<Reservation> reservations = reservationRepository.findByStatus(Status.COMPLETED);
+        return reservations.stream().map(reservationMapper::toDto).collect(Collectors.toList());
     }
 }

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -22,7 +23,7 @@ public class Reservation {
     private Long id;
 
     @NotNull
-    private LocalDate reservationDate;
+    private LocalDateTime reservationDate;
 
     @ManyToOne
     private Announcement announcement;

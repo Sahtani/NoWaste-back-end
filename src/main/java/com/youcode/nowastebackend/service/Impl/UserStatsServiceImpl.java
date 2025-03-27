@@ -80,7 +80,12 @@ public class UserStatsServiceImpl implements UserStatsService {
         long completedCollectionsCount = reservations.stream()
                 .filter(r -> "COMPLETED".equals(r.getStatus().toString()))
                 .count();
-        stats.setCompletedCollections((int) completedCollectionsCount);
+        stats.setCompletedReservations((int) completedCollectionsCount);
+
+        long activeReservationsCount = reservations.stream()
+                .filter(r -> "ACTIVE".equals(r.getStatus().toString()))
+                .count();
+        stats.setActiveReservations((int) activeReservationsCount);
 
         return stats;
     }
@@ -118,7 +123,7 @@ public class UserStatsServiceImpl implements UserStatsService {
 
         stats.setTotalCollections(0);
         stats.setReservations(0);
-        stats.setCompletedCollections(0);
+        stats.setCompletedReservations(0);
 
         return stats;
     }
@@ -156,7 +161,7 @@ public class UserStatsServiceImpl implements UserStatsService {
         long completedCount = reservations.stream()
                 .filter(r -> "COMPLETED".equals(r.getStatus().toString()))
                 .count();
-        stats.setCompletedCollections((int) completedCount);
+        stats.setCompletedReservations((int) completedCount);
 
         return stats;
     }
@@ -200,7 +205,7 @@ public class UserStatsServiceImpl implements UserStatsService {
         long completedCollectionsCount = allReservations.stream()
                 .filter(r -> "COMPLETED".equals(r.getStatus().toString()))
                 .count();
-        stats.setCompletedCollections((int) completedCollectionsCount);
+        stats.setActiveReservations((int) completedCollectionsCount);
 
         return stats;
     }

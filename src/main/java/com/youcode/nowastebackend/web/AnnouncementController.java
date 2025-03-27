@@ -43,16 +43,6 @@ public class AnnouncementController extends GenericController<AnnouncementReques
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
-   /* @GetMapping("/donor")
-    public ResponseEntity<List<AnnouncementResponseDto>> getMyAnnouncements(
-            @AuthenticationPrincipal UserDetails userDetails) {
-
-        List<AnnouncementResponseDto> announcements = announcementService.getAnnouncementsByDonor(
-                userDetails.getUsername());
-
-        return ResponseEntity.ok(announcements);
-    }*/
-
     @PostMapping("/{id}/interest")
     public ResponseEntity<AnnouncementResponseDto> markInterest(
             @PathVariable Long id,

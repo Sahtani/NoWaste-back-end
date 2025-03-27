@@ -18,5 +18,6 @@ public class UserStats {
 
     private int totalCollections;
     private int reservations;
-    private int completedCollections;
+    private int activeReservations;
+    private int completedReservations;
 }

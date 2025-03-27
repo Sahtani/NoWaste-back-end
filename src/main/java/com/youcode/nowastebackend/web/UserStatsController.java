@@ -10,12 +10,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api/users/stats")
-@Tag(name = "User Statistics", description = "Endpoints pour récupérer les statistiques utilisateurs")
 @Slf4j
 public class UserStatsController {
 
@@ -27,41 +25,31 @@ public class UserStatsController {
     }
 
     @GetMapping("/me")
-    @Operation(summary = "Récupérer les statistiques de l'utilisateur courant")
     public ResponseEntity<UserStats> getCurrentUserStats(@AuthenticationPrincipal AppUser currentUser) {
-        log.info("Récupération des statistiques pour l'utilisateur courant avec ID: {}", currentUser.getId());
         UserStats stats = userStatsService.getUserStats(currentUser.getId());
         return ResponseEntity.ok(stats);
     }
 
     @GetMapping("/users/{userId}")
-    @Operation(summary = "Récupérer les statistiques d'un utilisateur spécifique")
     public ResponseEntity<UserStats> getUserStats(@PathVariable Long userId) {
-        log.info("Récupération des statistiques pour l'utilisateur avec ID: {}", userId);
         UserStats stats = userStatsService.getUserStats(userId);
         return ResponseEntity.ok(stats);
     }
 
     @GetMapping("/donors/{userId}")
-    @Operation(summary = "Récupérer les statistiques spécifiques au donateur pour un utilisateur")
     public ResponseEntity<UserStats> getDonorStats(@PathVariable Long userId) {
-        log.info("Récupération des statistiques donateur pour l'utilisateur avec ID: {}", userId);
         UserStats stats = userStatsService.getDonorStats(userId);
         return ResponseEntity.ok(stats);
     }
 
     @GetMapping("/beneficiaries/{userId}")
-    @Operation(summary = "Récupérer les statistiques spécifiques au bénéficiaire pour un utilisateur")
     public ResponseEntity<UserStats> getBeneficiaryStats(@PathVariable Long userId) {
-        log.info("Récupération des statistiques bénéficiaire pour l'utilisateur avec ID: {}", userId);
         UserStats stats = userStatsService.getBeneficiaryStats(userId);
         return ResponseEntity.ok(stats);
     }
 
     @GetMapping("/overall")
-    @Operation(summary = "Récupérer les statistiques globales de la plateforme")
     public ResponseEntity<UserStats> getOverallStats() {
-        log.info("Récupération des statistiques globales de la plateforme");
         UserStats stats = userStatsService.getOverallStats();
         return ResponseEntity.ok(stats);
     }
