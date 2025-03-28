@@ -92,7 +92,7 @@ public class ReservationServiceImpl  implements ReservationService {
 
     @Override
     public List<ReservationResponseDto> getActiveReservations() {
-        List<Reservation> reservations = reservationRepository.findByStatus(Status.ACTIVE);
+        List<Reservation> reservations = reservationRepository.findByStatus(Status.PENDING);
         return reservations.stream().map(reservationMapper::toDto).collect(Collectors.toList());
     }
 

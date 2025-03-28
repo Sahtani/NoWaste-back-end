@@ -25,13 +25,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 
 @Service
 @Validated
-@Transactional
 public class AnnouncementServiceImpl extends AbstractService<Announcement, AnnouncementRequestDto, AnnouncementResponseDto, Long> implements AnnouncementService {
 
     private static final Logger logger = LoggerFactory.getLogger(AnnouncementService.class);
@@ -160,20 +161,11 @@ public class AnnouncementServiceImpl extends AbstractService<Announcement, Annou
         return announcementMapper.toDto(announcementRepository.save(announcement));
     }
 
-  /*  @Override
-    public List<AnnouncementResponseDto> getAnnouncementsByDonor(String username) {
-        AppUser donor = appUserRepository.findByName(username)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with username: " + username));
-
-        return announcementRepository.findByDonorId(donor.getId());
-    }*/
-
-    @Transactional
     public AnnouncementResponseDto markInterest(Long announcementId, String username) {
         Announcement announcement = announcementRepository.findById(announcementId)
                 .orElseThrow(() -> new ResourceNotFoundException("Announcement not found with id: " + announcementId));
 
-        AppUser user = appUserRepository.findByName(username)
+        AppUser user = appUserRepository.findByEmail(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with username: " + username));
 
         if (!"BENEFICER".equals(user.getRole())) {
@@ -185,6 +177,7 @@ public class AnnouncementServiceImpl extends AbstractService<Announcement, Annou
         }
 
         announcement.getInterestedUsers().add(user);
+        announcement.setBeneficiary(user);
          announcementRepository.save(announcement);
          return announcementMapper.toDto(announcement);
     }
@@ -215,6 +208,28 @@ public class AnnouncementServiceImpl extends AbstractService<Announcement, Annou
         return announcementMapper.toDto(announcement);
     }
 
+    @Override
+    public void cancelInterest(Long announcementId, String username) {
+        Announcement announcement = announcementRepository.findById(announcementId)
+                .orElseThrow(() -> new ResourceNotFoundException("Announcement not found with id: " + announcementId));
+
+        AppUser user = appUserRepository.findByEmail(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with username: " + username));
+
+        if (!announcement.getInterestedUsers().contains(user)) {
+             new BadRequestException("You have not expressed interest in this announcement");
+        }
+
+        announcement.getInterestedUsers().remove(user);
+
+        if (user.equals(announcement.getBeneficiary())) {
+            announcement.setBeneficiary(null);
+            announcement.setStatus(Status.AVAILABLE);
+        }
+
+        announcementRepository.save(announcement);
+    }
+
     @Transactional
     public AnnouncementResponseDto confirmCollection(Long announcementId, String username) {
         Announcement announcement = announcementRepository.findById(announcementId)
@@ -236,4 +251,29 @@ public class AnnouncementServiceImpl extends AbstractService<Announcement, Annou
         announcementRepository.save(announcement);
         return announcementMapper.toDto(announcement);
     }
+
+    @Override
+    public List<AnnouncementResponseDto> getAnnouncementsByUserId(Long userId) {
+
+        AppUser user = appUserRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
+
+        List<Announcement> announcements = announcementRepository.findByDonorId(userId);
+
+        return announcements.stream()
+                .map(announcementMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<AnnouncementResponseDto> getInterestedAnnouncementsByUserId(Long userId) {
+        AppUser user = appUserRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
+
+        List<Announcement> announcements = announcementRepository.findByInterestedUsersContaining(user);
+
+        return announcements.stream()
+                .map(announcementMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
 }

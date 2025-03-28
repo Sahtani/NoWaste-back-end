@@ -15,6 +15,8 @@ public record AnnouncementResponseDto(
         @NotNull LocalDateTime createdAt,
         @NotNull Status status,
         List<ProductEmbeddableDto> products,
-        @NotNull UserEmbeddableDto donor
+        @NotNull UserEmbeddableDto donor,
+        @NotNull UserEmbeddableDto beneficiary
+
 ) {
 }

@@ -64,6 +64,15 @@ public class AnnouncementController extends GenericController<AnnouncementReques
         return ResponseEntity.ok(announcement);
     }
 
+    @DeleteMapping("/{id}/interest")
+    public ResponseEntity<Void> cancelInterest(
+            @PathVariable Long id,
+            @AuthenticationPrincipal UserDetails userDetails) {
+
+        announcementService.cancelInterest(id, userDetails.getUsername());
+        return ResponseEntity.noContent().build();
+    }
+
     @PostMapping("/{id}/confirm")
     public ResponseEntity<AnnouncementResponseDto> confirmCollection(
             @PathVariable Long id,
@@ -71,6 +80,18 @@ public class AnnouncementController extends GenericController<AnnouncementReques
 
         AnnouncementResponseDto announcement = announcementService.confirmCollection(id, userDetails.getUsername());
         return ResponseEntity.ok(announcement);
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<AnnouncementResponseDto>> getAnnouncementsByUserId(@PathVariable Long userId) {
+        List<AnnouncementResponseDto> announcements = announcementService.getAnnouncementsByUserId(userId);
+        return ResponseEntity.ok(announcements);
+    }
+
+    @GetMapping("/users/{userId}/interested-announcements")
+    public ResponseEntity<List<AnnouncementResponseDto>> getInterestedAnnouncementsByUserId(@PathVariable Long userId) {
+        List<AnnouncementResponseDto> announcements = announcementService.getInterestedAnnouncementsByUserId(userId);
+        return ResponseEntity.ok(announcements);
     }
 
 }

@@ -1,7 +1,9 @@
 package com.youcode.nowastebackend.repository;
 
+import com.youcode.nowastebackend.common.security.entity.AppUser;
 import com.youcode.nowastebackend.dto.response.AnnouncementResponseDto;
 import com.youcode.nowastebackend.entity.Announcement;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -29,4 +31,7 @@ public interface AnnouncementRepository extends JpaRepository<Announcement, Long
     int countByBeneficiaryIdAndStatus(Long beneficiaryId, String status);
 
 
+    List<Announcement> findByInterestedUsersContaining(AppUser user);
+
+    List<Announcement> findByTitle(@NotNull String title);
 }

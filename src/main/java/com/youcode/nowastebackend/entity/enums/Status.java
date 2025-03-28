@@ -8,5 +8,6 @@ public enum Status  {
     ACTIVE,
     CANCELLED,
     COMPLETED,
-    RESERVED
+    RESERVED,
+    AVAILABLE
 }

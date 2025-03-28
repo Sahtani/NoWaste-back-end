@@ -4,6 +4,7 @@ import com.youcode.nowastebackend.dto.request.ReservationRequestDto;
 import com.youcode.nowastebackend.dto.response.ReservationResponseDto;
 import com.youcode.nowastebackend.entity.enums.Status;
 import com.youcode.nowastebackend.service.ReservationService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class ReservationController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ReservationResponseDto> createReservation(@RequestBody ReservationRequestDto requestDto) {
+    public ResponseEntity<ReservationResponseDto> createReservation(@RequestBody @Valid ReservationRequestDto requestDto) {
         return ResponseEntity.ok(reservationService.createReservation(requestDto));
     }
 
